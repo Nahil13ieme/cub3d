@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:09:00 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/04/17 13:58:09 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/04/19 23:37:34 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	destroy_debug(t_debug **debug)
 {
 	if (!(*debug))
 		return ;
+	(*debug)->game->is_debugging =0;
 	mlx_destroy_window((*debug)->mlx, (*debug)->win);
 	(*debug)->win = NULL;
 	free((*debug));
