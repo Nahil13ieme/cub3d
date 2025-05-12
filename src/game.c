@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:20:51 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/04/17 22:01:18 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/09 17:57:15 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_game	*new_game(void *mlx, void *win, int is_debugging)
 	game->win = win;
 	game->is_debugging = is_debugging;
 	game->game_state = RUNNING;
-	game->map = NULL;
+	game->map = new_map();
 	game->player = NULL;
 	game->render = new_render(game);
 	if (is_debugging)

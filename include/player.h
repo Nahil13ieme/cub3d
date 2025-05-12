@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:10:34 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/04/17 12:16:56 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/09 17:34:58 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ typedef struct s_player
 	float		hp;
 	float		speed;
 	float		fov;
+	float		dir;
 	t_vector2d	pos;
 	void		(*destroy)(struct s_player *player);
-	// sprite
 }	t_player;
 
 void	destroy_player(t_player *player);

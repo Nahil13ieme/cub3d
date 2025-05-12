@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:16:35 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/04/17 12:17:07 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/09 17:57:02 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ typedef struct s_map
 }	t_map;
 
 void	destroy_map(t_map *map);
+t_map	*new_map();
 
 #endif /* MAP_H */
