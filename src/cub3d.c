@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 15:43:10 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/04/17 15:32:54 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/12 15:38:33 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int ac, char **av)
 	win = mlx_new_window(mlx, 1080, 720, "KAWABUNGA");
 	if (!win)
 		return (1);
-	game = new_game(mlx, win, DEBUG);
+	game = new_game(mlx, win, DEBUG, av);
 	mlx_loop_hook(game->mlx, game_loop, game);
 	mlx_hook(game->win, 2, 1L << 0, key_hook, game);
 	mlx_loop(mlx);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:30:34 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/04/17 18:38:05 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/12 15:37:42 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,13 @@
 int	check_file_name(char *av, int len);
 int	check_file(char *av);
 
+t_map	*ft_init_map(char *path);
+t_player	*ft_init_player(char **map);
+
 # define TRUE 1
 # define FALSE 0
+
+# define BUFFER_SIZE 1000000
 
 # ifndef DEBUG
 #  define DEBUG 0

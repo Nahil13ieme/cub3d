@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 17:10:44 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/04/17 21:24:33 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/12 15:39:42 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ enum e_fps
 	FRAME_TIME_MS = (1000 / 60)
 };
 
-t_game	*new_game(void *mlx, void *win, int is_debugging);
+t_game	*new_game(void *mlx, void *win, int is_debugging, char **av);
 
 int		game_loop(t_game *game);
 
