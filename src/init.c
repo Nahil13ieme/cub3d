@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:13:49 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/05/12 15:40:02 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/05/13 09:54:31 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_player	*ft_init_player(char **map)
 				player->pos.x = j;
 				player->pos.y = i;
 				ft_set_dir_player(map[i][j], player);
-				//printf("pos x : %f\npos y : %f\ndir : %f\n", player->pos.x, player->pos.y, player->dir);
+				printf("pos x : %f\npos y : %f\ndir : %f\n", player->pos.x, player->pos.y, player->dir);
 				return (player);
 			}
 			j++;

@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:16:01 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/09 17:57:57 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/13 11:31:24 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ t_render	*new_render(t_game *game)
 	r->main_buffer = new_texture(game->mlx, W_WIDTH, W_HEIGHT);
 	if (!r->main_buffer)
 		return (NULL);
+	r->debug_buffer = new_texture(game->mlx, (game->map->width + 1) * 32, (game->map->height + 1) * 32);
+		if (!r->debug_buffer)
+			return (NULL);
 	r->mlx = game->mlx;
 	r->destroy = destroy_render;
 	r->render_loop = render_loop;
@@ -66,11 +69,76 @@ void	draw_buffer(t_game *game)
 	draw_floor(game);
 }
 
+void	draw_rect(t_texture *t, int start_x, int start_y, int size, int color)
+{
+	int	x;
+	int	y;
+	int	i;
+
+	y = 0;
+	while (y < size)
+	{
+		x = 0;
+		while (x < size)
+		{
+			int px = start_x + x;
+			int py = start_y + y;
+			if (px < 0 || py < 0 || px >= t->width || py >= t->height)
+			{
+				x++;
+				continue;
+			}
+			i = py * t->line_len + px * (t->bpp / 8);
+			t->buffer[i + 0] = (color & 0x0000FF);
+			t->buffer[i + 1] = (color & 0x00FF00) >> 8;
+			t->buffer[i + 2] = (color & 0xFF0000) >> 16;
+			x++;
+		}
+		y++;
+	}
+}
+
+void	draw_debug_buffer(t_game *game)
+{
+	int			x;
+	int			y;
+	t_texture	*t;
+	int			color;
+
+	t = game->render->debug_buffer;
+	color = 0x0000FF;
+	y = 0;
+	while (y <= game->map->height)
+	{
+		x = 0;
+		while (x <= game->map->width)
+		{
+			if (game->map->tiles[y][x] == '1')
+				draw_rect(t, x * 32, y * 32, 32, color);
+			else if (game->map->tiles[y][x] == 'N')
+				draw_rect(t, x * 32, y * 32, 32, 0x00FF00);
+			else if (game->map->tiles[y][x] == ' ')
+				draw_rect(t, x * 32, y * 32, 32, 0x909090);
+			else if (game->map->tiles[y][x] == 0)
+				break ;
+			x++;
+		}
+		y++;
+	}
+}
+
+
 int		render_loop(t_game *game)
 {
 	mlx_clear_window(game->mlx, game->win);
 	draw_buffer(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->render->main_buffer->img_ptr, 0, 0);
+	if (game->is_debugging)
+	{
+		mlx_clear_window(game->debug->mlx, game->debug->win);
+		draw_debug_buffer(game);
+		mlx_put_image_to_window(game->debug->mlx, game->debug->win, game->render->debug_buffer->img_ptr, 0, 0);
+	}
 	return (1);
 }
 
