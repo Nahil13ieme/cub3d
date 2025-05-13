@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:20:51 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/12 15:39:13 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/05/13 15:50:06 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ t_game	*new_game(void *mlx, void *win, int is_debugging, char **av)
 	game->is_debugging = is_debugging;
 	game->game_state = RUNNING;
 	game->map = ft_init_map(av[1]);
+	if (game->map == NULL)
+		return (NULL);
 	game->player = ft_init_player(game->map->tiles);
 	game->render = new_render(game);
 	if (is_debugging)

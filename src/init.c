@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:13:49 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/05/13 09:54:31 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/13 16:32:33 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ t_player	*ft_init_player(char **map)
 	int	j;
 	t_player	*player;
 
-	player = malloc(sizeof(t_player));
+	player = NULL;
+	player = malloc(sizeof(t_player ));
 	i = 0;
 	while (map[i])
 	{

@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 15:03:53 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/05/13 15:13:15 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/05/13 16:48:31 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,13 @@ int	check_horizon(char *str)
 	last = 0;
 	while (str[i])
 	{
-		if(str[i] == '1' && first == 0)
-			first = 1;
-		if(str[i] != '1' && last == 0 && str[i - 1] == '1' && i > 0)
+		if (first == 1)
+			if(str[i] != '1' && str[i - 1] == '1')
+				last = 1;
+		if (str[i + 1] == 0 && str[i] == '1')
 			last = 1;
-		else
-			last = 0;
+		if (str[i] == '1' && first == 0)
+			first = 1;
 		i++;
 	}
 	if (first == 1 && last == 1)

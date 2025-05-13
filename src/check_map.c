@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 12:56:34 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/05/13 15:24:59 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/05/13 16:12:18 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,20 @@ int	ft_tablen(char	**tab)
 
 char	**ft_init_tab(int fd)
 {
-	size_t		a;
+	int		a;
 	char	buffer[BUFFER_SIZE + 1];
 	char	**tab;
 	char	*line;
 
 	line = NULL;
+	tab = NULL;
+	a = 0;
 	while (1)
 	{
 		a = read(fd, buffer, BUFFER_SIZE);
 		if (a < 1)
 			break ;
+		buffer[a] = '\0';
 		if (line == NULL)
 			line = ft_strdup(buffer);
 		else
@@ -68,7 +71,7 @@ char	**ft_init_tab(int fd)
 	}
 	tab = ft_split(line, '\n');
 	free(line);
-	return(tab);
+	return (tab);
 }
 
 void	ft_print_tab(char **tab)
@@ -109,6 +112,6 @@ t_map	*ft_init_map(char *path)
 	}
 	printf("height : %d\nwidth : %d\n", map->height, map->width);
 	if (check_border(*map) == 1)
-		return (printf("Error\nMap Invalide"), NULL);
+		return (printf("Error\nMap Invalide\n"), NULL);
 	return (map);
 }
