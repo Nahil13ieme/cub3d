@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 12:56:34 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/05/12 15:40:23 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/05/13 15:15:26 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,7 @@ t_map	*ft_init_map(char *path)
 		i++;
 	}
 	printf("height : %d\nwidth : %d\n", map->height, map->width);
+	if (check_border(*map) == 1)
+		return (printf("Error\nMap Invalide"), NULL);
 	return (map);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:30:34 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/12 15:37:42 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/05/13 15:14:03 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,12 @@
 # include "render.h"
 # include "game.h"
 
-int	check_file_name(char *av, int len);
-int	check_file(char *av);
+int			check_file_name(char *av, int len);
+int			check_file(char *av);
 
-t_map	*ft_init_map(char *path);
+t_map		*ft_init_map(char *path);
 t_player	*ft_init_player(char **map);
+int			check_border(t_map map);
 
 # define TRUE 1
 # define FALSE 0
