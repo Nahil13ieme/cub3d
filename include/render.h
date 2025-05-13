@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 15:42:03 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/04/17 21:29:47 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/13 10:37:26 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_render
 {
 	void		*mlx;
 	t_texture	*main_buffer;
+	t_texture	*debug_buffer;
 	int			(*render_loop)(struct s_game *game);
 	void		(*destroy)(struct s_render *render);
 }	t_render;

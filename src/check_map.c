@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 12:56:34 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/05/12 15:40:23 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/05/13 11:11:38 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,14 +100,14 @@ t_map	*ft_init_map(char *path)
 	close(fd);
 	if(map->tiles == NULL)
 		return(printf("Error\nmap is not load"), NULL);
-	//ft_print_tab(map->tiles);
 	map->height = ft_tablen(map->tiles);
 	while (map->tiles[i])
 	{
 		if (map->width < ft_strlen(map->tiles[i]))
-			map->width = ft_strlen(map->tiles[i]);
+		map->width = ft_strlen(map->tiles[i]);
 		i++;
 	}
 	printf("height : %d\nwidth : %d\n", map->height, map->width);
+	ft_print_tab(map->tiles);
 	return (map);
 }
