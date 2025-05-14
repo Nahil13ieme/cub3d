@@ -6,11 +6,8 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:13:49 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/05/14 14:14:35 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/14 14:22:32 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-
-
-
