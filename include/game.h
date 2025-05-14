@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 17:10:44 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/12 15:39:42 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/05/14 11:55:41 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 # define GAME_H
 
 # include "cub3d.h"
+
+# define KEY_W 119
+# define KEY_A 97
+# define KEY_S 115
+# define KEY_D 100
 
 typedef struct s_map	t_map;
 typedef struct s_debug	t_debug;
@@ -56,5 +61,6 @@ void	cap_fps(void);
 void	destroy_game(t_game *game);
 
 int		key_hook(int keycode, t_game *game);
+int		handle_key_release(int keycode, t_game *game);
 
 #endif /* GAME_H */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:20:51 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/12 15:39:13 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/05/14 11:57:35 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_game	*new_game(void *mlx, void *win, int is_debugging, char **av)
 	game->is_debugging = is_debugging;
 	game->game_state = RUNNING;
 	game->map = ft_init_map(av[1]);
-	game->player = ft_init_player(game->map->tiles);
+	game->player = ft_init_player(game);
 	game->render = new_render(game);
 	if (is_debugging)
 		game->debug = new_debug(game);
@@ -40,6 +40,7 @@ t_game	*new_game(void *mlx, void *win, int is_debugging, char **av)
 int	game_loop(t_game *game)
 {
 	(void)game;
+	move_player(game);
 	cap_fps();
 	game->render->render_loop(game);
 	return (1);
@@ -57,11 +58,27 @@ void	cap_fps(void)
 		usleep((FRAME_TIME_MS - frame) * 1000);
 	g_last_frame_time = clock();
 }
+int	handle_key_release(int keycode, t_game *game)
+{
+	if (keycode == 'w' || keycode == 's')
+		game->player->velocity.y = 0;
+	if (keycode == 'a' || keycode == 'd')
+		game->player->velocity.x = 0;
+	return (0);
+}
 
 int	key_hook(int keycode, t_game *game)
 {
 	if (keycode == 65307)
 		game->destroy(game);
+	if (keycode == KEY_W)
+		game->player->velocity.y = -0.05f;
+	if (keycode == KEY_S)
+		game->player->velocity.y = 0.05f;
+	if (keycode == KEY_D)
+		game->player->velocity.x = 0.05f;
+	if (keycode == KEY_A)
+		game->player->velocity.x -= 0.05f;
 	return (0);
 }
 

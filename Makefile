@@ -4,7 +4,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -g -DDEBUG=$(DEBUG)
 
 SRC = $(addprefix src/, cub3d.c check_file.c game.c debug.c render.c map.c player.c texture.c \
-		init.c check_map.c)
+		init.c check_map.c draw.c)
 VECTOR = $(addprefix src/vector/, vector2d.c vector2d_math.c)
 
 OBJ = $(SRC:.c=.o) $(VECTOR:.c=.o)

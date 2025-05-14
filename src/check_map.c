@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 12:56:34 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/05/13 11:11:38 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/14 12:51:27 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,9 @@ t_map	*ft_init_map(char *path)
 	int	i;
 
 	map = malloc(sizeof(t_map));
+	if (!map)
+		return (NULL);
+	map->destroy = destroy_map;
 	i = 0;
 	map->width = 0;
 	fd = open(path, O_RDONLY);

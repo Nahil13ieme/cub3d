@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:16:35 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/09 17:57:02 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/14 12:50:36 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,12 @@
 
 typedef struct s_map
 {
-	int		width;
-	int		height;
-	char	**tiles;
-	void	(*destroy)(struct s_map *map);
+	int			width;
+	int			height;
+	char		dir;
+	char		**tiles;
+	t_vector2d	start;
+	void		(*destroy)(struct s_map *map);
 	//objects if any
 }	t_map;
 
