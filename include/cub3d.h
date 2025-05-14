@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/14 14:22:53 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/14 16:46:16 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int			check_file(char *av);
 
 t_map		*ft_init_map(char *path);
 int			check_border(t_map map);
+int			ft_tablen(char	**tab);
+
 
 # define TRUE 1
 # define FALSE 0

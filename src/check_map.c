@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 12:56:34 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/05/14 14:15:19 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/14 16:48:18 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ t_map	*ft_init_map(char *path)
 	t_map	*map;
 	int	i;
 
-	map = malloc(sizeof(t_map));
+	map = NULL;
 	if (!map)
 		return (NULL);
 	map->destroy = destroy_map;

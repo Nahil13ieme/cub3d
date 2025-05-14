@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 15:03:53 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/05/14 15:04:09 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/05/14 16:16:27 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,44 @@ int	check_horizon(char *str)
 	return (0);
 }
 
+int	check_verti(char **tab)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (j < ft_strlen(tab[0]))
+	{
+		i = 0;
+		while (i < ft_tablen(tab))
+			{
+				if (tab[i][j] != ' ')
+				{
+					if (tab[i][j] != '1')
+						return (1);
+					else
+						break ;
+				}
+				i++;
+			}
+		i = ft_tablen(tab);
+		while (i >= 0)
+		{
+			if (tab[i][j] != ' ')
+			{
+				if (tab[i][j] != '1')
+					return (1);
+				else
+					break ;
+			}
+			i--;
+		}
+		j++;
+	}
+	return (0);
+}
+
 int	check_border(t_map map)
 {
 	int	i;
@@ -41,5 +79,8 @@ int	check_border(t_map map)
 			return (1);
 		i++;
 	}
+	if (check_verti(map.tiles) == 1)
+		return (1);
 	return (0);
 }
+

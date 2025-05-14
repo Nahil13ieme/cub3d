@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:15:02 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/14 14:14:46 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/14 16:47:50 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@ t_player	*ft_init_player(t_game *game)
 	t_player	*player;
 	char		**map;
 
-	player = malloc(sizeof(t_player));
+	player = NULL;
 	if (!player)
 		return (NULL);
 	map = game->map->tiles;
+	if (map == NULL)
+		return (free(player), NULL);
 	player->velocity.x = 0;
 	player->velocity.y = 0;
 	i = 0;
@@ -44,7 +46,7 @@ t_player	*ft_init_player(t_game *game)
 		}
 		i++;
 	}
-	return (printf("No Starting Pos\n"), NULL);
+	return (printf("Error\nNo Starting Pos\n"), NULL);
 }
 
 void	move_player(t_game	*game)

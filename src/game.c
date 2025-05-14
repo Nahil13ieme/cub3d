@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:20:51 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/14 15:05:35 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/05/14 16:50:19 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ t_game	*new_game(void *mlx, void *win, int is_debugging, char **av)
 	if (game->map == NULL)
 		return (NULL);
 	game->player = ft_init_player(game);
+	if (game->player == NULL)
+		return (destroy_map(game->map), NULL);
 	game->render = new_render(game);
 	if (is_debugging)
 		game->debug = new_debug(game);
