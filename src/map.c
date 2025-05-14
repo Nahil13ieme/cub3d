@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:15:26 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/14 16:31:43 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/05/14 17:22:46 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,6 @@ t_map	*new_map()
 
 void	destroy_map(t_map *map)
 {
-	int	i;
-
-	i = 0;
-	if (map->tiles != NULL)
-			while (i > ft_tablen(map->tiles))
-			{
-				free(map->tiles[i]);
-				i++;
-			}
 	free(map->tiles);
 	free(map);
 }
@@ -74,4 +65,16 @@ int		parsing(char **tiles)
 		}
 	}
 	return (0);
+}
+
+void	ft_free_map(char **map)
+{
+	int	i;
+
+	i = 0;
+	while (i <= ft_tablen(map))
+	{
+		free(map[i]);
+	}
+	free(map);
 }

@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/14 16:46:16 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/05/14 17:21:01 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ t_map		*ft_init_map(char *path);
 int			check_border(t_map map);
 int			ft_tablen(char	**tab);
 
+void	ft_free_map(char **all);
 
 # define TRUE 1
 # define FALSE 0
