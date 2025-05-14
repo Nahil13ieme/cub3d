@@ -89,6 +89,7 @@ fclean: clean
 re: fclean all
 
 debug:
+	@$(MAKE) fclean
 	@$(MAKE) DEBUG=1
 
 mac:
