@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:15:02 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/14 12:59:31 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/14 14:14:46 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_player	*ft_init_player(t_game *game)
 				player->pos.x = j;
 				player->pos.y = i;
 				game->map->start = vector2d(j, i);
-				player->dir = vector2d(0, 1);
+				player->dir = vector2d(0, -1);
 				return (player);
 			}
 			j++;
@@ -58,5 +58,8 @@ void	move_player(t_game	*game)
 
 void	destroy_player(t_player *player)
 {
-	free(player);
+	t_player	*fplayer;
+
+	fplayer = (t_player *)player;
+	free(fplayer);
 }

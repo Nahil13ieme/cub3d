@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:20:51 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/14 11:57:35 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/14 14:15:04 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,10 @@ int	key_hook(int keycode, t_game *game)
 		game->player->velocity.x = 0.05f;
 	if (keycode == KEY_A)
 		game->player->velocity.x -= 0.05f;
+	if (keycode == KEY_LEFT)
+		game->player->dir = vector2d_scale(game->player->dir, -.8f);
+	if (keycode == KEY_LEFT)
+		game->player->dir = vector2d_scale(game->player->dir, -.8f);
 	return (0);
 }
 
