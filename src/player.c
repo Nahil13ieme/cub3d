@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:15:02 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/14 13:34:49 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/14 14:14:46 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,8 @@ void	move_player(t_game	*game)
 
 void	destroy_player(t_player *player)
 {
-	free(player);
+	t_player	*fplayer;
+
+	fplayer = (t_player *)player;
+	free(fplayer);
 }

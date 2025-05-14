@@ -5,10 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/16 10:30:34 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/14 12:17:32 by nbenhami         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2025/05/14 14:13:17 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
+
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -28,15 +31,17 @@
 # include "render.h"
 # include "game.h"
 
-int	check_file_name(char *av, int len);
-int	check_file(char *av);
+int			check_file_name(char *av, int len);
+int			check_file(char *av);
 
-t_map	*ft_init_map(char *path);
+t_map		*ft_init_map(char *path);
+t_player	*ft_init_player(char **map);
+int			check_border(t_map map);
 
 # define TRUE 1
 # define FALSE 0
 
-# define BUFFER_SIZE 1000000
+# define BUFFER_SIZE sizeof(char *)
 
 # ifndef DEBUG
 #  define DEBUG 0
