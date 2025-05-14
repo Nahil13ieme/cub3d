@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 12:56:34 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/05/14 16:48:18 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/05/14 17:11:42 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,7 @@ t_map	*ft_init_map(char *path)
 	t_map	*map;
 	int	i;
 
-	map = NULL;
-	if (!map)
-		return (NULL);
+	map = malloc(sizeof(t_map));
 	map->destroy = destroy_map;
 	i = 0;
 	map->width = 0;

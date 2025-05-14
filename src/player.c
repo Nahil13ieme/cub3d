@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:15:02 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/14 16:47:50 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/05/14 17:16:43 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_player	*ft_init_player(t_game *game)
 	t_player	*player;
 	char		**map;
 
-	player = NULL;
+	player = malloc(sizeof(t_player));
 	if (!player)
 		return (NULL);
 	map = game->map->tiles;
