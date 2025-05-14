@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:16:01 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/14 12:23:55 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/14 13:52:07 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,16 +157,19 @@ void	draw_debug_buffer(t_game *game)
 	int			y;
 	t_texture	*t;
 	int			color;
+	t_vector2d	player;
 
 	t = game->render->debug_buffer;
 	color = 0x0000FF;
 	y = 0;
+	player = vector2d_scale(game->player->pos, 32);
 	while (y <= game->map->height)
 	{
 		x = 0;
 		while (x <= game->map->width)
 		{
-			draw_circle(t, game->player->pos.x * 32, game->player->pos.y * 32, 8, 0x00DD00);
+			draw_line(t, player, vector2d_add(player, vector2d_scale(game->player->dir, 10)), 0x00ff00);
+			draw_circle(t, player.x- 4, player.y - 4, 8, 0x00DD00);
 			if (game->map->tiles[y][x] == '1')
 				draw_rect(t, x * 32, y * 32, 32, color);
 			else if (game->map->tiles[y][x] == ' ')
