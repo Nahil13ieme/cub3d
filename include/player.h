@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:10:34 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/14 14:22:44 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/15 15:46:39 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 typedef struct s_vector2d	t_vector2d;
 typedef struct s_game		t_game;
+typedef struct s_bbox		t_bbox;
 
 typedef struct s_player
 {
@@ -26,8 +27,15 @@ typedef struct s_player
 	t_vector2d	velocity;
 	t_vector2d	dir;
 	t_vector2d	pos;
+	t_bbox		box;
 	void		(*destroy)(struct s_player *player);
 }	t_player;
+
+typedef struct s_bbox
+{
+	t_vector2d pos;    // coin en haut à gauche
+	t_vector2d size;   // largeur = size.x, hauteur = size.y
+} t_bbox;
 
 t_player	*ft_init_player(t_game *game);
 void		move_player(t_game	*game);
