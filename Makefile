@@ -93,7 +93,15 @@ debug:
 	@$(MAKE) DEBUG=1
 
 mac:
-	@make -C $(LIBFT_DIR)
-	@make -C $(MLX_DIR)
+	@$(MAKE) fclean
+	@make -C $(LIBFT_DIR) re
+	@make -C $(MLX_DIR) re
+	@$(MAKE)
+
+macdebug:
+	@$(MAKE) fclean
+	@make -C $(LIBFT_DIR) re
+	@make -C $(MLX_DIR) re
+	@$(MAKE) DEBUG=1
 
 .PHONY: all clean fclean re debug mac

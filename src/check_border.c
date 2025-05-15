@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_border.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 15:03:53 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/05/14 16:16:27 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/05/15 14:21:27 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ int	check_verti(char **tab)
 		i = 0;
 		while (i < ft_tablen(tab))
 			{
-				if (tab[i][j] != ' ')
+				if (tab[i][j] != ' ' && tab[i][j] != '\n')
 				{
 					if (tab[i][j] != '1')
-						return (1);
+						return (printf("ligne %d\ncolonne %d\n", i, j), 1);
 					else
 						break ;
 				}
@@ -54,10 +54,10 @@ int	check_verti(char **tab)
 		i = ft_tablen(tab);
 		while (i >= 0)
 		{
-			if (tab[i][j] != ' ')
+			if (tab[i][j] != ' ' && tab[i][j] != '\n')
 			{
 				if (tab[i][j] != '1')
-					return (1);
+					return (printf("ligne %d \n colonne %d \n", i, j), 1);
 				else
 					break ;
 			}
@@ -73,7 +73,7 @@ int	check_border(t_map map)
 	int	i;
 
 	i = 0;
-	while (map.tiles[i])
+	while (i < ft_tablen(map.tiles))
 	{
 		if(check_horizon(map.tiles[i]) == 1)
 			return (1);
