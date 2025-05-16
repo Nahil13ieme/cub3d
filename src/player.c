@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:15:02 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/14 14:14:46 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/16 14:48:39 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_player	*ft_init_player(t_game *game)
 	player->velocity.y = 0;
 	i = 0;
 	player->destroy = destroy_player;
+	player->fov = 60;
 	while (map[i])
 	{
 		j = 0;

@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 15:42:03 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/14 12:17:16 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/14 20:00:28 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ void		destroy_render(t_render *render);
 void		draw_pixel(t_texture *t, int x, int y, int color);
 void		draw_thick_pixel(t_texture *t, int x, int y, int size, int color);
 void		draw_line(t_texture *t, t_vector2d start, t_vector2d end, int size);
+t_vector2d	raycast_to_wall(t_game *game, t_vector2d origin, t_vector2d direction);
 
 #endif /* RENDER_H */

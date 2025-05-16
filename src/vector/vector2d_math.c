@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:08:55 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/04/16 21:25:05 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/14 17:01:51 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,14 @@ t_vector2d	vector2d_scale(t_vector2d a, float scale)
 	v.x = a.x * scale;
 	v.y = a.y * scale;
 	return (v);
+}
+
+t_vector2d	vector2d_rotate(t_vector2d dir, float angle)
+{
+	t_vector2d new_dir;
+	new_dir.x = dir.x * cos(angle) - dir.y * sin(angle);
+	new_dir.y = dir.x * sin(angle) + dir.y * cos(angle);
+	return new_dir;
 }
 
 float	vector2d_length(t_vector2d v)

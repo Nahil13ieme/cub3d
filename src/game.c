@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:20:51 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/14 14:15:04 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/14 18:29:59 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,47 @@ t_game	*new_game(void *mlx, void *win, int is_debugging, char **av)
 	game->map = ft_init_map(av[1]);
 	game->player = ft_init_player(game);
 	game->render = new_render(game);
+	init_input(game);
 	if (is_debugging)
 		game->debug = new_debug(game);
 	game->destroy = destroy_game;
 	return (game);
 }
 
+void	input(t_game *game)
+{
+	if (game->input.right)
+	game->player->dir = vector2d_rotate(game->player->dir, -0.1f);
+	if (game->input.left)
+		game->player->dir = vector2d_rotate(game->player->dir, 0.1f);
+	game->player->velocity.x = 0;
+	game->player->velocity.y = 0;
+	if (game->input.w)
+	{
+		game->player->velocity.x += game->player->dir.x * 0.05f;
+		game->player->velocity.y += game->player->dir.y * 0.05f;
+	}
+	if (game->input.s)
+	{
+		game->player->velocity.x -= game->player->dir.x * 0.05f;
+		game->player->velocity.y -= game->player->dir.y * 0.05f;
+	}
+	if (game->input.a)
+	{
+		game->player->velocity.x += game->player->dir.y * 0.05f;
+		game->player->velocity.y -= game->player->dir.x * 0.05f;
+	}
+	if (game->input.d)
+	{
+		game->player->velocity.x -= game->player->dir.y * 0.05f;
+		game->player->velocity.y += game->player->dir.x * 0.05f;
+	}
+}
+
 int	game_loop(t_game *game)
 {
 	(void)game;
+	input(game);
 	move_player(game);
 	cap_fps();
 	game->render->render_loop(game);
@@ -60,10 +92,18 @@ void	cap_fps(void)
 }
 int	handle_key_release(int keycode, t_game *game)
 {
-	if (keycode == 'w' || keycode == 's')
-		game->player->velocity.y = 0;
-	if (keycode == 'a' || keycode == 'd')
-		game->player->velocity.x = 0;
+	if (keycode == KEY_W)
+		game->input.w = false;
+	if (keycode == KEY_S)
+		game->input.s = false;
+	if (keycode == KEY_A)
+		game->input.a = false;
+	if (keycode == KEY_D)
+		game->input.d = false;
+	if (keycode == KEY_LEFT)
+		game->input.left = false;
+	if (keycode == KEY_RIGHT)
+		game->input.right = false;
 	return (0);
 }
 
@@ -72,17 +112,17 @@ int	key_hook(int keycode, t_game *game)
 	if (keycode == 65307)
 		game->destroy(game);
 	if (keycode == KEY_W)
-		game->player->velocity.y = -0.05f;
+		game->input.w = true;
 	if (keycode == KEY_S)
-		game->player->velocity.y = 0.05f;
-	if (keycode == KEY_D)
-		game->player->velocity.x = 0.05f;
+		game->input.s = true;
 	if (keycode == KEY_A)
-		game->player->velocity.x -= 0.05f;
+		game->input.a = true;
+	if (keycode == KEY_D)
+		game->input.d = true;
 	if (keycode == KEY_LEFT)
-		game->player->dir = vector2d_scale(game->player->dir, -.8f);
-	if (keycode == KEY_LEFT)
-		game->player->dir = vector2d_scale(game->player->dir, -.8f);
+		game->input.left = true;
+	if (keycode == KEY_RIGHT)
+		game->input.right = true;
 	return (0);
 }
 

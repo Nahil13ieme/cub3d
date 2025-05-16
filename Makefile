@@ -3,7 +3,7 @@ NAME        = cub3d
 
 # ⚙️ Compilateur et flags
 CC          = cc
-CFLAGS      = -Wall -Wextra -Werror -g -DDEBUG=$(DEBUG)
+CFLAGS      =  -g -DDEBUG=$(DEBUG)
 
 # 📁 Répertoires
 SRC_DIR     = src/
@@ -89,6 +89,7 @@ fclean: clean
 re: fclean all
 
 debug:
+	@$(MAKE) fclean
 	@$(MAKE) DEBUG=1
 
 mac:

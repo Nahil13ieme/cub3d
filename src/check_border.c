@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_border.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
+/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 15:03:53 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/05/13 16:48:31 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/05/15 17:13:51 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ int	check_horizon(char *str)
 	int	first;
 	int	last;
 	int	i;
-	
+
 	i = 0;
 	first = 0;
 	last = 0;
 	while (str[i])
 	{
 		if (first == 1)
-			if(str[i] != '1' && str[i - 1] == '1')
+			if (str[i] != '1' && str[i - 1] == '1')
 				last = 1;
 		if (str[i + 1] == 0 && str[i] == '1')
 			last = 1;
@@ -44,7 +44,7 @@ int	check_border(t_map map)
 	i = 0;
 	while (map.tiles[i])
 	{
-		if(check_horizon(map.tiles[i]) == 1)
+		if (check_horizon(map.tiles[i]) == 1)
 			return (1);
 		i++;
 	}

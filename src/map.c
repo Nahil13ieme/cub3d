@@ -6,20 +6,19 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:15:26 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/09 18:23:10 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/15 17:16:08 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/map.h"
 
-t_map	*new_map()
+t_map	*new_map(void)
 {
 	t_map	*map;
 	int		i;
 	int		j;
-	
+
 	map = malloc(sizeof(t_map));
-	
 	map->tiles = malloc(sizeof(char *) * 5);
 	if (!map->tiles)
 		return (NULL);
@@ -27,8 +26,8 @@ t_map	*new_map()
 	while (i < 5)
 	{
 		map->tiles[i] = malloc(sizeof(char) * 5);
-		j = 0;
-		while (j < 5)
+		j = -1;
+		while (++j < 5)
 		{
 			if (i == 0 || j == 0 || i == 4 || j == 4)
 				map->tiles[i][j] = '1';
@@ -36,7 +35,6 @@ t_map	*new_map()
 				map->tiles[i][j] = 'P';
 			else
 				map->tiles[i][j] = '0';
-			j++;
 		}
 		i++;
 	}
@@ -49,20 +47,17 @@ void	destroy_map(t_map *map)
 	free(map);
 }
 
-int		parsing(char **tiles)
+int	parsing(char **tiles)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while(tiles[i])
+	while (tiles[i])
 	{
 		j = 0;
 		while (tiles[i][j])
-		{
-			if (i == 0 && tiles[i][j])
 			j++;
-		}
 	}
 	return (0);
 }

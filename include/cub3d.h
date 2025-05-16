@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/14 14:22:53 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/14 18:30:16 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int			check_file_name(char *av, int len);
 int			check_file(char *av);
 
 t_map		*ft_init_map(char *path);
+void		init_input(t_game *game);
 int			check_border(t_map map);
 
 # define TRUE 1

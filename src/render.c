@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:16:01 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/14 13:52:07 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/16 15:06:18 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@ t_render	*new_render(t_game *game)
 	r->main_buffer = new_texture(game->mlx, W_WIDTH, W_HEIGHT);
 	if (!r->main_buffer)
 		return (NULL);
-	r->debug_buffer = new_texture(game->mlx, (game->map->width + 1) * 32, (game->map->height + 1) * 32);
-		if (!r->debug_buffer)
-			return (NULL);
+	r->debug_buffer = new_texture(game->mlx,
+		(game->map->width + 1) * 32, (game->map->height + 1) * 32);
+	if (!r->debug_buffer)
+		return (NULL);
 	r->mlx = game->mlx;
 	r->destroy = destroy_render;
 	r->render_loop = render_loop;
@@ -69,43 +70,41 @@ void	draw_buffer(t_game *game)
 	draw_floor(game);
 }
 
-void	draw_circle(t_texture *t, int start_x, int start_y, int size, int color)
+void	draw_circle(t_texture *t, t_vector2d start, int size, int color)
 {
-	int	radius = size / 2;
-	int	cx = start_x + radius;
-	int	cy = start_y + radius;
-	int	x = -radius;
-	int	y = -radius;
+	t_vector2d	c;
+	t_vector2d	loop;
+	t_vector2d	p;
+	int			radius;
 
-	while (y <= radius)
+	radius = size / 2;
+	c.x = start.x;
+	c.y = start.y;
+	loop.y = -radius;
+	while (loop.y <= radius)
 	{
-		x = -radius;
-		while (x <= radius)
+		loop.x = -radius;
+		while (loop.x <= radius)
 		{
-			if (x * x + y * y <= radius * radius)
+			if (loop.x * loop.x + loop.y * loop.y <= radius * radius)
 			{
-				int px = cx + x;
-				int py = cy + y;
-				if (px >= 0 && py >= 0 && px < t->width && py < t->height)
-				{
-					int i = py * t->line_len + px * (t->bpp / 8);
-					t->buffer[i + 0] = (color & 0x0000FF);
-					t->buffer[i + 1] = (color & 0x00FF00) >> 8;
-					t->buffer[i + 2] = (color & 0xFF0000) >> 16;
-				}
+				p.x = c.x + loop.x;
+				p.y = c.y + loop.y;
+				if (p.x >= 0 && p.y >= 0 && p.x < t->width && p.y < t->height)
+					draw_pixel(t, p.x, p.y, color);
 			}
-			x++;
+			loop.x++;
 		}
-		y++;
+		loop.y++;
 	}
 }
 
 
-void	draw_rect(t_texture *t, int start_x, int start_y, int size, int color)
+void	draw_rect(t_texture *t, t_vector2d start, int size, int color)
 {
-	int	x;
-	int	y;
-	int	i;
+	int			x;
+	int			y;
+	t_vector2d	p;
 
 	y = 0;
 	while (y < size)
@@ -113,17 +112,14 @@ void	draw_rect(t_texture *t, int start_x, int start_y, int size, int color)
 		x = 0;
 		while (x < size)
 		{
-			int px = start_x + x;
-			int py = start_y + y;
-			if (px < 0 || py < 0 || px >= t->width || py >= t->height)
+			p.x = start.x + x;
+			p.y = start.y + y;
+			if (p.x < 0 || p.y < 0 || p.x >= t->width || p.y >= t->height)
 			{
 				x++;
 				continue;
 			}
-			i = py * t->line_len + px * (t->bpp / 8);
-			t->buffer[i + 0] = (color & 0x0000FF);
-			t->buffer[i + 1] = (color & 0x00FF00) >> 8;
-			t->buffer[i + 2] = (color & 0xFF0000) >> 16;
+			draw_pixel(t, p.x, p.y, color);
 			x++;
 		}
 		y++;
@@ -151,16 +147,34 @@ void	clear_buffer(t_texture *t)
 	}
 }
 
+void	raycast_cone(t_game *game, t_texture *t)
+{
+	int			num_rays = 60;
+	int			i;
+	double		fov_rad = (game->player->fov * M_PI) / 180.0;
+	t_vector2d	player = vector2d_scale(game->player->pos, 32);
+	double		start_angle = atan2(game->player->dir.y, game->player->dir.x) - fov_rad / 2;
+
+	for (i = 0; i < num_rays; i++)
+	{
+		double ray_angle = start_angle + (fov_rad / num_rays) * i;
+		t_vector2d dir = {
+			cos(ray_angle),
+			sin(ray_angle)
+		};
+		t_vector2d target = raycast_to_wall(game, player, dir);
+		draw_line(t, player, target, 0xFF0000);
+	}
+}
+
 void	draw_debug_buffer(t_game *game)
 {
 	int			x;
 	int			y;
 	t_texture	*t;
-	int			color;
 	t_vector2d	player;
 
 	t = game->render->debug_buffer;
-	color = 0x0000FF;
 	y = 0;
 	player = vector2d_scale(game->player->pos, 32);
 	while (y <= game->map->height)
@@ -168,12 +182,12 @@ void	draw_debug_buffer(t_game *game)
 		x = 0;
 		while (x <= game->map->width)
 		{
-			draw_line(t, player, vector2d_add(player, vector2d_scale(game->player->dir, 10)), 0x00ff00);
-			draw_circle(t, player.x- 4, player.y - 4, 8, 0x00DD00);
+			raycast_cone(game, t);
+			draw_circle(t, player, 8, 0x10DD00);
 			if (game->map->tiles[y][x] == '1')
-				draw_rect(t, x * 32, y * 32, 32, color);
+				draw_rect(t, (t_vector2d){32 * x, 32 * y}, 32, 0x0000FF);
 			else if (game->map->tiles[y][x] == ' ')
-				draw_rect(t, x * 32, y * 32, 32, 0x909090);
+				draw_rect(t, (t_vector2d){32 * x, 32 * y}, 32, 0x800880);
 			else if (game->map->tiles[y][x] == 0)
 				break ;
 			x++;
@@ -182,10 +196,10 @@ void	draw_debug_buffer(t_game *game)
 	}
 }
 
-
 int		render_loop(t_game *game)
 {
 	mlx_clear_window(game->mlx, game->win);
+	clear_buffer(game->render->main_buffer);
 	draw_buffer(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->render->main_buffer->img_ptr, 0, 0);
 	if (game->is_debugging)
@@ -201,6 +215,8 @@ int		render_loop(t_game *game)
 void	destroy_render(t_render *render)
 {
 	mlx_destroy_image(render->mlx, render->main_buffer->img_ptr);
+	mlx_destroy_image(render->mlx, render->debug_buffer->img_ptr);
+	free(render->debug_buffer);
 	free(render->main_buffer);
 	free(render);
 }
