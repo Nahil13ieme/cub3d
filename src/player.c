@@ -6,11 +6,23 @@
 /*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:15:02 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/14 17:16:43 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/05/16 14:29:08 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/player.h"
+
+t_player	*init_player_value(t_player *player)
+{
+	player->down = 0;
+	player->up = 0;
+	player->left = 0;
+	player->right = 0;
+	player->velocity.x = 0;
+	player->velocity.y = 0;
+	player->destroy = destroy_player;
+	return (player);
+}
 
 t_player	*ft_init_player(t_game *game)
 {
@@ -22,13 +34,11 @@ t_player	*ft_init_player(t_game *game)
 	player = malloc(sizeof(t_player));
 	if (!player)
 		return (NULL);
+	player = init_player_value(player);
 	map = game->map->tiles;
 	if (map == NULL)
 		return (free(player), NULL);
-	player->velocity.x = 0;
-	player->velocity.y = 0;
 	i = 0;
-	player->destroy = destroy_player;
 	while (map[i])
 	{
 		j = 0;
@@ -49,7 +59,7 @@ t_player	*ft_init_player(t_game *game)
 	return (printf("Error\nNo Starting Pos\n"), NULL);
 }
 
-void	move_player(t_game	*game)
+void	apply_velocity(t_game	*game)
 {
 	t_vector2d	pos;
 

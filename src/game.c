@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:20:51 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/14 16:50:19 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/05/16 14:34:26 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ t_game	*new_game(void *mlx, void *win, int is_debugging, char **av)
 int	game_loop(t_game *game)
 {
 	(void)game;
-	move_player(game);
+	identify_move(game);
+	apply_velocity(game);
 	cap_fps();
 	game->render->render_loop(game);
 	return (1);
@@ -62,33 +63,33 @@ void	cap_fps(void)
 		usleep((FRAME_TIME_MS - frame) * 1000);
 	g_last_frame_time = clock();
 }
-int	handle_key_release(int keycode, t_game *game)
-{
-	if (keycode == 'w' || keycode == 's')
-		game->player->velocity.y = 0;
-	if (keycode == 'a' || keycode == 'd')
-		game->player->velocity.x = 0;
-	return (0);
-}
+// int	handle_key_release(int keycode, t_game *game)
+// {
+// 	if (keycode == 'w' || keycode == 's')
+// 		game->player->velocity.y = 0;
+// 	if (keycode == 'a' || keycode == 'd')
+// 		game->player->velocity.x = 0;
+// 	return (0);
+// }
 
-int	key_hook(int keycode, t_game *game)
-{
-	if (keycode == 65307)
-		game->destroy(game);
-	if (keycode == KEY_W)
-		game->player->velocity.y = -0.05f;
-	if (keycode == KEY_S)
-		game->player->velocity.y = 0.05f;
-	if (keycode == KEY_D)
-		game->player->velocity.x = 0.05f;
-	if (keycode == KEY_A)
-		game->player->velocity.x -= 0.05f;
-	if (keycode == KEY_LEFT)
-		game->player->dir = vector2d_scale(game->player->dir, -.8f);
-	if (keycode == KEY_LEFT)
-		game->player->dir = vector2d_scale(game->player->dir, -.8f);
-	return (0);
-}
+// int	key_hook(int keycode, t_game *game)
+// {
+// 	if (keycode == 65307)
+// 		game->destroy(game);
+// 	if (keycode == KEY_W)
+// 		game->player->velocity.y = -0.05f;
+// 	if (keycode == KEY_S)
+// 		game->player->velocity.y = 0.05f;
+// 	if (keycode == KEY_D)
+// 		game->player->velocity.x = 0.05f;
+// 	if (keycode == KEY_A)
+// 		game->player->velocity.x -= 0.05f;
+// 	if (keycode == KEY_LEFT)
+// 		game->player->dir = vector2d_scale(game->player->dir, -.8f);
+// 	if (keycode == KEY_LEFT)
+// 		game->player->dir = vector2d_scale(game->player->dir, -.8f);
+// 	return (0);
+// }
 
 void	destroy_game(t_game *game)
 {
