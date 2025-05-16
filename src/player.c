@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:15:02 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/16 14:29:08 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/05/16 16:10:05 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,11 @@ t_player	*init_player_value(t_player *player)
 	player->up = 0;
 	player->left = 0;
 	player->right = 0;
+	player->maj = 0;
 	player->velocity.x = 0;
 	player->velocity.y = 0;
 	player->destroy = destroy_player;
+	player->speed = SPEED;
 	return (player);
 }
 
@@ -61,11 +63,19 @@ t_player	*ft_init_player(t_game *game)
 
 void	apply_velocity(t_game	*game)
 {
-	t_vector2d	pos;
-
-	pos.x = game->player->pos.x + game->player->velocity.x;
-	pos.y = game->player->pos.y + game->player->velocity.y;
-	game->player->pos = pos;
+	if ((game->player->up == 1 && game->player->right == 1) ||
+		(game->player->up == 1 && game->player->left == 1) ||
+		(game->player->down == 1 && game->player->right == 1) ||
+		(game->player->down == 1 && game->player->left == 1))
+		{
+			game->player->pos.x += game->player->velocity.x / 1.5;
+			game->player->pos.y += game->player->velocity.y / 1.5;
+		}
+	else
+	{
+		game->player->pos.x += game->player->velocity.x;
+		game->player->pos.y += game->player->velocity.y;
+	}
 }
 
 void	destroy_player(t_player *player)

@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:20:51 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/16 14:34:26 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/05/16 16:06:37 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,33 +63,6 @@ void	cap_fps(void)
 		usleep((FRAME_TIME_MS - frame) * 1000);
 	g_last_frame_time = clock();
 }
-// int	handle_key_release(int keycode, t_game *game)
-// {
-// 	if (keycode == 'w' || keycode == 's')
-// 		game->player->velocity.y = 0;
-// 	if (keycode == 'a' || keycode == 'd')
-// 		game->player->velocity.x = 0;
-// 	return (0);
-// }
-
-// int	key_hook(int keycode, t_game *game)
-// {
-// 	if (keycode == 65307)
-// 		game->destroy(game);
-// 	if (keycode == KEY_W)
-// 		game->player->velocity.y = -0.05f;
-// 	if (keycode == KEY_S)
-// 		game->player->velocity.y = 0.05f;
-// 	if (keycode == KEY_D)
-// 		game->player->velocity.x = 0.05f;
-// 	if (keycode == KEY_A)
-// 		game->player->velocity.x -= 0.05f;
-// 	if (keycode == KEY_LEFT)
-// 		game->player->dir = vector2d_scale(game->player->dir, -.8f);
-// 	if (keycode == KEY_LEFT)
-// 		game->player->dir = vector2d_scale(game->player->dir, -.8f);
-// 	return (0);
-// }
 
 void	destroy_game(t_game *game)
 {
