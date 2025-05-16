@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 12:16:34 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/16 15:07:46 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/16 15:39:48 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,6 @@ t_vector2d	raycast_to_wall(t_game *game,
 		step.y = 1;
 		side_dist.y = (map_y + 1.0 - pos_y) * delta_dist.y;
 	}
-
-	// DDA
 	while (1)
 	{
 		if (side_dist.x < side_dist.y)
@@ -106,22 +104,16 @@ t_vector2d	raycast_to_wall(t_game *game,
 			map_y += step.y;
 			side = 1;
 		}
-
-		// Sortie si hors limite ou collision
 		if (map_x < 0 || map_y < 0 || map_y >= game->map->height || map_x >= game->map->width)
 			break;
 		if (game->map->tiles[map_y][map_x] == '1')
 			break;
 	}
-
-	// Calcul distance exacte jusqu’au mur
 	double distance;
 	if (side == 0)
 		distance = (side_dist.x - delta_dist.x);
 	else
 		distance = (side_dist.y - delta_dist.y);
-
-	// Retourner point de collision en pixels
 	t_vector2d hit;
 	hit.x = origin.x + direction.x * distance * 32.0;
 	hit.y = origin.y + direction.y * distance * 32.0;
