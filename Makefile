@@ -11,7 +11,7 @@ VEC_DIR     = src/vector/
 OBJ_DIR     = obj/
 
 # 📄 Fichiers source
-SRC         = cub3d.c check_file.c game.c debug.c draw.c \
+SRC         = cub3d.c check_file.c game.c debug.c draw.c debug_utils.c \
 			  render.c map.c player.c texture.c \
 			  init.c check_map.c check_border.c
 

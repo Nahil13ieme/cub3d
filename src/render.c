@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:16:01 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/16 19:40:31 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/16 20:06:07 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,35 +64,24 @@ void	draw_walls(t_game *game)
 {
 	double			fov_rad = (game->player->fov * M_PI) / 180.0;
 	double			angle_start = atan2(game->player->dir.y, game->player->dir.x) - fov_rad / 2;
-	t_vector2d		player = vector2d_scale(game->player->pos, 32); // en pixels
+	t_vector2d		player = vector2d_scale(game->player->pos, 32);
 
 	for (int col = 0; col < W_WIDTH; col++)
 	{
-		// Angle du rayon pour cette colonne
 		double ray_angle = angle_start + ((double)col / W_WIDTH) * fov_rad;
 		t_vector2d dir = { cos(ray_angle), sin(ray_angle) };
-
-		// Point d'impact du rayon
 		t_vector2d hit = raycast_to_wall(game, player, dir);
-
-		// Distance (avec correction fish-eye)
 		double dist = hypot(hit.x - player.x, hit.y - player.y);
 		double corrected_dist = dist * cos(ray_angle - atan2(game->player->dir.y, game->player->dir.x));
-
-		// Calcul de la hauteur du mur
 		double proj_plane_dist = (W_WIDTH / 2.0) / tan(fov_rad / 2.0);
 		int wall_height = (int)((32.0 / corrected_dist) * proj_plane_dist);
-
-		// Déterminer les bornes de dessin
 		int wall_top = (W_HEIGHT / 2) - (wall_height / 2);
 		int wall_bot = wall_top + wall_height;
 		if (wall_top < 0) wall_top = 0;
 		if (wall_bot >= W_HEIGHT) wall_bot = W_HEIGHT - 1;
-
-		// Dessiner le mur (ligne verticale)
 		for (int y = wall_top; y < wall_bot; y++)
 		{
-			draw_pixel(game->render->main_buffer, col, y, 0xFF0000); // couleur rouge
+			draw_pixel(game->render->main_buffer, col, y, 0x8B4513);
 		}
 	}
 }
