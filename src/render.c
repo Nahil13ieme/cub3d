@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:16:01 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/16 20:06:07 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/17 19:58:39 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,12 +200,12 @@ void	draw_debug_buffer(t_game *game)
 	t = game->render->debug_buffer;
 	y = 0;
 	player = vector2d_scale(game->player->pos, 32);
+	raycast_cone(game, t);
 	while (y <= game->map->height)
 	{
 		x = 0;
 		while (x <= game->map->width)
 		{
-			raycast_cone(game, t);
 			draw_circle(t, player, 8, 0x10DD00);
 			if (game->map->tiles[y][x] == '1')
 				draw_rect(t, (t_vector2d){32 * x, 32 * y}, 32, 0x0000FF);
