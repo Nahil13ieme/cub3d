@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 17:10:44 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/14 17:19:46 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/21 14:06:02 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@
 # define KEY_RIGHT 65361
 # define KEY_LEFT 65363
 
-typedef struct s_map	t_map;
-typedef struct s_debug	t_debug;
-typedef struct s_render	t_render;
-typedef struct s_player	t_player;
+typedef struct s_map				t_map;
+typedef struct s_debug				t_debug;
+typedef struct s_render				t_render;
+typedef struct s_player				t_player;
+typedef struct s_texture_manager	t_texture_manager;
 
 typedef struct s_input
 {
@@ -50,16 +51,17 @@ typedef enum e_game_state
 
 typedef struct s_game
 {
-	void			*mlx;
-	void			*win;
-	int				is_debugging;
-	t_map			*map;
-	t_debug			*debug;
-	t_player		*player;
-	t_render		*render;
-	t_game_state	game_state;
-	t_input			input;
-	void			(*destroy)(struct s_game *game);
+	void				*mlx;
+	void				*win;
+	int					is_debugging;
+	t_map				*map;
+	t_texture_manager	*tex_man;
+	t_debug				*debug;
+	t_player			*player;
+	t_render			*render;
+	t_game_state		game_state;
+	t_input				input;
+	void				(*destroy)(struct s_game *game);
 }	t_game;
 
 enum e_fps

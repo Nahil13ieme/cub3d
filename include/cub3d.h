@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/16 20:02:02 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/18 16:17:42 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include "player.h"
 # include "map.h"
 # include "texture.h"
+# include "raycast.h"
 # include "render.h"
 # include "game.h"
 
@@ -37,7 +38,6 @@ int			check_file(char *av);
 t_map		*ft_init_map(char *path);
 void		init_input(t_game *game);
 int			check_border(t_map map);
-long		get_time_microseconds();
 
 # define TRUE 1
 # define FALSE 0

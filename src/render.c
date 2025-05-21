@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:16:01 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/17 19:58:39 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/21 17:19:39 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,48 @@ t_render	*new_render(t_game *game)
 	if (!r->main_buffer)
 		return (NULL);
 	r->debug_buffer = new_texture(game->mlx,
-		(game->map->width + 1) * 32, (game->map->height + 1) * 32);
+			(game->map->width + 1) * 32, (game->map->height + 1) * 32);
 	if (!r->debug_buffer)
 		return (NULL);
 	r->mlx = game->mlx;
 	r->destroy = destroy_render;
 	r->render_loop = render_loop;
 	return (r);
+}
+
+void draw_img_to_buffer(t_texture *buffer, t_texture *sprite, int x_offset, int y_offset)
+{
+    int             y;
+    int             x;
+    char            *src_pixel;
+    unsigned int    color;
+    char            *dst_pixel;
+
+    if (!buffer->buffer || !sprite->buffer)
+        return;
+    y = -1;
+    while (++y < sprite->height)
+    {
+        // Vérifier si le pixel est dans les limites du buffer de destination
+        if (y + y_offset < 0 || y + y_offset >= buffer->height)
+            continue;
+            
+        x = -1;
+        while (++x < sprite->width)
+        {
+            // Vérifier si le pixel est dans les limites du buffer de destination
+            if (x + x_offset < 0 || x + x_offset >= buffer->width)
+                continue;
+                
+            src_pixel = sprite->buffer + (y * sprite->line_len) + (x * (sprite->bpp / 8));
+            color = *(unsigned int *)src_pixel;
+            if (color && color != 0xFF000000)
+            {
+                dst_pixel = buffer->buffer + ((y + y_offset) * buffer->line_len) + ((x + x_offset) * (buffer->bpp / 8));
+                *(unsigned int *)dst_pixel = color;
+            }
+        }
+    }
 }
 
 void	draw_floor(t_game *game)
@@ -64,24 +99,40 @@ void	draw_walls(t_game *game)
 {
 	double			fov_rad = (game->player->fov * M_PI) / 180.0;
 	double			angle_start = atan2(game->player->dir.y, game->player->dir.x) - fov_rad / 2;
+	double			player_angle = atan2(game->player->dir.y, game->player->dir.x);
 	t_vector2d		player = vector2d_scale(game->player->pos, 32);
+	t_texture		*tex = game->tex_man->wall_north;
 
 	for (int col = 0; col < W_WIDTH; col++)
 	{
-		double ray_angle = angle_start + ((double)col / W_WIDTH) * fov_rad;
+		double ray_angle = angle_start + ((double)col / W_WIDTH) * (fov_rad);
 		t_vector2d dir = { cos(ray_angle), sin(ray_angle) };
 		t_vector2d hit = raycast_to_wall(game, player, dir);
 		double dist = hypot(hit.x - player.x, hit.y - player.y);
-		double corrected_dist = dist * cos(ray_angle - atan2(game->player->dir.y, game->player->dir.x));
+		double corrected_dist = dist * cos(ray_angle - player_angle);
 		double proj_plane_dist = (W_WIDTH / 2.0) / tan(fov_rad / 2.0);
 		int wall_height = (int)((32.0 / corrected_dist) * proj_plane_dist);
 		int wall_top = (W_HEIGHT / 2) - (wall_height / 2);
 		int wall_bot = wall_top + wall_height;
-		if (wall_top < 0) wall_top = 0;
+		//if (wall_top < 0) wall_top = 0;
 		if (wall_bot >= W_HEIGHT) wall_bot = W_HEIGHT - 1;
+		double wall_x;
+		double dx = hit.x - floor(hit.x / 32.0) * 32.0;
+		double dy = hit.y - floor(hit.y / 32.0) * 32.0;
+		if (fabs(dx - 16) > fabs(dy - 16))
+			wall_x = hit.y / 32.0; // mur vertical
+		else
+			wall_x = hit.x / 32.0; // mur horizontal
+		wall_x -= floor(wall_x);
+		int tex_x = (int)(wall_x * tex->width);
 		for (int y = wall_top; y < wall_bot; y++)
 		{
-			draw_pixel(game->render->main_buffer, col, y, 0x8B4513);
+			double tex_pos = (double)(y - wall_top) / wall_height;
+			int tex_y = (int)(tex_pos * tex->height);
+			int tex_i = tex_y * tex->line_len + tex_x * (tex->bpp / 8);
+			unsigned char *buf = tex->buffer;
+			int color = (buf[tex_i + 2] << 16) | (buf[tex_i + 1] << 8) | buf[tex_i];
+			draw_pixel(game->render->main_buffer, col, y, color);
 		}
 	}
 }
@@ -122,7 +173,6 @@ void	draw_circle(t_texture *t, t_vector2d start, int size, int color)
 	}
 }
 
-
 void	draw_rect(t_texture *t, t_vector2d start, int size, int color)
 {
 	int			x;
@@ -140,7 +190,7 @@ void	draw_rect(t_texture *t, t_vector2d start, int size, int color)
 			if (p.x < 0 || p.y < 0 || p.x >= t->width || p.y >= t->height)
 			{
 				x++;
-				continue;
+				continue ;
 			}
 			draw_pixel(t, p.x, p.y, color);
 			x++;
@@ -167,26 +217,6 @@ void	clear_buffer(t_texture *t)
 			x++;
 		}
 		y++;
-	}
-}
-
-void	raycast_cone(t_game *game, t_texture *t)
-{
-	int			num_rays = 60;
-	int			i;
-	double		fov_rad = (game->player->fov * M_PI) / 180.0;
-	t_vector2d	player = vector2d_scale(game->player->pos, 32);
-	double		start_angle = atan2(game->player->dir.y, game->player->dir.x) - fov_rad / 2;
-
-	for (i = 0; i < num_rays; i++)
-	{
-		double ray_angle = start_angle + (fov_rad / num_rays) * i;
-		t_vector2d dir = {
-			cos(ray_angle),
-			sin(ray_angle)
-		};
-		t_vector2d target = raycast_to_wall(game, player, dir);
-		draw_line(t, player, target, 0xFF0000);
 	}
 }
 

@@ -6,7 +6,8 @@
 		"random": "c",
 		"texture.h": "c",
 		"render.h": "c",
-		"cmath": "c"
+		"cmath": "c",
+		"stdbool.h": "c"
 	},
 	"C_Cpp.errorSquiggles": "disabled"
 }

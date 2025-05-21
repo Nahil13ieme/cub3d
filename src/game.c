@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:20:51 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/14 18:29:59 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/21 14:05:07 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_game	*new_game(void *mlx, void *win, int is_debugging, char **av)
 	game->is_debugging = is_debugging;
 	game->game_state = RUNNING;
 	game->map = ft_init_map(av[1]);
+	game->tex_man = load_textures(game);
 	game->player = ft_init_player(game);
 	game->render = new_render(game);
 	init_input(game);
@@ -40,32 +41,30 @@ t_game	*new_game(void *mlx, void *win, int is_debugging, char **av)
 
 void	input(t_game *game)
 {
+	t_vector2d	*v;
+
+	v = &game->player->velocity;
 	if (game->input.right)
-	game->player->dir = vector2d_rotate(game->player->dir, -0.1f);
+		game->player->dir = vector2d_rotate(game->player->dir, -0.1f);
 	if (game->input.left)
 		game->player->dir = vector2d_rotate(game->player->dir, 0.1f);
-	game->player->velocity.x = 0;
-	game->player->velocity.y = 0;
+	*v = vector2d(0, 0);
 	if (game->input.w)
-	{
-		game->player->velocity.x += game->player->dir.x * 0.05f;
-		game->player->velocity.y += game->player->dir.y * 0.05f;
-	}
+		*v = vector2d_add(*v, vector2d_scale(game->player->dir, 0.05f));
 	if (game->input.s)
-	{
-		game->player->velocity.x -= game->player->dir.x * 0.05f;
-		game->player->velocity.y -= game->player->dir.y * 0.05f;
-	}
+		*v = vector2d_substract(*v, vector2d_scale(game->player->dir, 0.05f));
 	if (game->input.a)
 	{
-		game->player->velocity.x += game->player->dir.y * 0.05f;
-		game->player->velocity.y -= game->player->dir.x * 0.05f;
+		v->x += game->player->dir.y * 0.05f;
+		v->y -= game->player->dir.x * 0.05f;
 	}
 	if (game->input.d)
 	{
-		game->player->velocity.x -= game->player->dir.y * 0.05f;
-		game->player->velocity.y += game->player->dir.x * 0.05f;
+		v->x -= game->player->dir.y * 0.05f;
+		v->y += game->player->dir.x * 0.05f;
 	}
+    if (vector2d_length(*v) > 0.05f)
+        *v = vector2d_scale(vector2d_normalize(*v), 0.05f);
 }
 
 int	game_loop(t_game *game)
@@ -90,6 +89,7 @@ void	cap_fps(void)
 		usleep((FRAME_TIME_MS - frame) * 1000);
 	g_last_frame_time = clock();
 }
+
 int	handle_key_release(int keycode, t_game *game)
 {
 	if (keycode == KEY_W)

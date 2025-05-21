@@ -6,21 +6,11 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 12:16:34 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/17 19:44:36 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/18 15:35:58 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
-
-typedef struct s_raycast
-{
-	t_vector2d	step;
-	t_vector2d	side_dist;
-	t_vector2d	delta_dist;
-	t_vector2d	pos;
-	int			map_x;
-	int			map_y;
-}	t_raycast;
+#include "../include/raycast.h"
 
 void	draw_pixel(t_texture *t, int x, int y, int color)
 {
@@ -32,108 +22,35 @@ void	draw_pixel(t_texture *t, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	draw_line_low(t_texture *t, int x0, int y0, int x1, int y1, int color)
-{
-	int	dx;
-	int	dy;
-	int	yi;
-	int	d;
-	int	y;
-	int	x;
-
-	dx = x1 - x0;
-	dy = y1 - y0;
-	yi = 1;
-	if (dy < 0)
-	{
-		yi = -1;
-		dy = -dy;
-	}
-	d = (2 * dy) - dx;
-	y = y0;
-	x = x0;
-	while (x <= x1)
-	{
-		draw_pixel(t, x, y, color);
-		if (d > 0)
-		{
-			y += yi;
-			d += 2 * (dy - dx);
-		}
-		else
-			d += 2 * dy;
-		x++;
-	}
-}
-
-void	draw_line_high(t_texture *t, int x0, int y0, int x1, int y1, int color)
-{
-	int	dx;
-	int	dy;
-	int	xi;
-	int	d;
-	int	y;
-	int	x;
-
-	dx = x1 - x0;
-	dy = y1 - y0;
-	xi = 1;
-	if (dx < 0)
-	{
-		xi = -1;
-		dx = -dx;
-	}
-	d = (2 * dx) - dy;
-	y = y0;
-	x = x0;
-	while (y <= y1)
-	{
-		draw_pixel(t, x, y, color);
-		if (d > 0)
-		{
-			x += xi;
-			d += 2 * (dx - dy);
-		}
-		else
-			d += 2 * dx;
-		y++;
-	}
-}
-
 void	draw_line(t_texture *t, t_vector2d start, t_vector2d end, int color)
 {
-	int	x0;
-	int	y0;
-	int	x1;
-	int	y1;
+	int			i;
+	double		steps;
+	t_vector2d	dis;
+	t_vector2d	inc;
+	t_vector2d	start_inc;
 
-	x0 = (int)start.x;
-	y0 = (int)start.y;
-	x1 = (int)end.x;
-	y1 = (int)end.y;
-	if (abs(y1 - y0) < abs(x1 - x0))
+	dis = vector2d(end.x - start.x, end.y - start.y);
+	steps = fmax(fabs(dis.x), fabs(dis.y));
+	if (steps == 0)
+		return ;
+	inc = vector2d(dis.x / steps, dis.y / steps);
+	start_inc = vector2d(start.x, start.y);
+	i = 0;
+	while (i <= steps)
 	{
-		if (x0 > x1)
-			draw_line_low(t, x1, y1, x0, y0, color);
-		else
-			draw_line_low(t, x0, y0, x1, y1, color);
-	}
-	else
-	{
-		if (y0 > y1)
-			draw_line_high(t, x1, y1, x0, y0, color);
-		else
-			draw_line_high(t, x0, y0, x1, y1, color);
+		draw_pixel(t, (int)start_inc.x, (int)start_inc.y, color);
+		start_inc.x += inc.x;
+		start_inc.y += inc.y;
+		i++;
 	}
 }
 
-void	init_raycast_vars(t_raycast *ray, t_vector2d origin, t_vector2d dir)
+static void	init_raycast_vars(t_raycast *ray, t_vector2d origin, t_vector2d dir)
 {
 	ray->pos = vector2d_divide(origin, 32);
 	ray->map_x = (int)ray->pos.x;
 	ray->map_y = (int)ray->pos.y;
-	ray->delta_dist.x = (dir.x == 0) ? 1e30 : fabs(1.0 / dir.x);
-	ray->delta_dist.y = (dir.y == 0) ? 1e30 : fabs(1.0 / dir.y);
 	if (dir.x < 0)
 	{
 		ray->step.x = -1;
@@ -156,7 +73,7 @@ void	init_raycast_vars(t_raycast *ray, t_vector2d origin, t_vector2d dir)
 	}
 }
 
-int	perform_dda(t_game *game, t_raycast *ray)
+static int	perform_dda(t_game *game, t_raycast *ray)
 {
 	int	side;
 
@@ -175,10 +92,10 @@ int	perform_dda(t_game *game, t_raycast *ray)
 			ray->map_y += ray->step.y;
 			side = 1;
 		}
-		if (ray->map_x < 0 || ray->map_y < 0 || 
-			game->map->tiles[ray->map_y][ray->map_x] == '1' ||
-			ray->map_y >= game->map->height || 
-			ray->map_x >= game->map->width)
+		if (ray->map_x < 0 || ray->map_y < 0
+			|| game->map->tiles[ray->map_y][ray->map_x] == '1'
+			|| ray->map_y >= game->map->height
+			|| ray->map_x >= game->map->width)
 			break ;
 	}
 	return (side);
@@ -190,6 +107,14 @@ t_vector2d	raycast_to_wall(t_game *game, t_vector2d origin, t_vector2d dir)
 	int			side;
 	double		distance;
 
+	if (dir.x == 0)
+		ray.delta_dist.x = 1e30;
+	else
+		ray.delta_dist.x = fabs(1.0 / dir.x);
+	if (dir.y == 0)
+		ray.delta_dist.y = 1e30;
+	else
+		ray.delta_dist.y = fabs(1.0 / dir.y);
 	init_raycast_vars(&ray, origin, dir);
 	side = perform_dda(game, &ray);
 	if (side == 0)
