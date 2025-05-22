@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 12:16:34 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/18 15:35:58 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/22 16:21:18 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,12 +96,22 @@ static int	perform_dda(t_game *game, t_raycast *ray)
 			|| game->map->tiles[ray->map_y][ray->map_x] == '1'
 			|| ray->map_y >= game->map->height
 			|| ray->map_x >= game->map->width)
-			break ;
+			{
+				if (game->map->tiles[ray->map_y][ray->map_x] == '1')
+				{
+					if (side == 0)
+						ray->side_hit = (ray->step.x > 0) ? 2 : 3;
+					else
+						ray->side_hit = (ray->step.y > 0) ? 1 : 0;
+				}	
+				break ;
+			}
 	}
 	return (side);
 }
 
-t_vector2d	raycast_to_wall(t_game *game, t_vector2d origin, t_vector2d dir)
+t_vector2d	raycast_to_wall(t_game *game, t_vector2d origin, t_vector2d dir,
+	int *side_hit)
 {
 	t_raycast	ray;
 	int			side;
@@ -117,6 +127,7 @@ t_vector2d	raycast_to_wall(t_game *game, t_vector2d origin, t_vector2d dir)
 		ray.delta_dist.y = fabs(1.0 / dir.y);
 	init_raycast_vars(&ray, origin, dir);
 	side = perform_dda(game, &ray);
+	*side_hit = ray.side_hit;
 	if (side == 0)
 		distance = (ray.side_dist.x - ray.delta_dist.x);
 	else

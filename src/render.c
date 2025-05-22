@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:16:01 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/21 17:19:39 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/22 16:35:17 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,28 +101,36 @@ void	draw_walls(t_game *game)
 	double			angle_start = atan2(game->player->dir.y, game->player->dir.x) - fov_rad / 2;
 	double			player_angle = atan2(game->player->dir.y, game->player->dir.x);
 	t_vector2d		player = vector2d_scale(game->player->pos, 32);
-	t_texture		*tex = game->tex_man->wall_north;
+	t_texture		*tex;
+	int				side;
 
 	for (int col = 0; col < W_WIDTH; col++)
 	{
 		double ray_angle = angle_start + ((double)col / W_WIDTH) * (fov_rad);
 		t_vector2d dir = { cos(ray_angle), sin(ray_angle) };
-		t_vector2d hit = raycast_to_wall(game, player, dir);
+		t_vector2d hit = raycast_to_wall(game, player, dir, &side);
+		if (side == 0)
+			tex = game->tex_man->wall_south;
+		else if (side == 1)
+			tex = game->tex_man->wall_north;
+		else if (side == 2)
+			tex = game->tex_man->wall_west;
+		else if (side == 3)
+			tex = game->tex_man->wall_east;
 		double dist = hypot(hit.x - player.x, hit.y - player.y);
 		double corrected_dist = dist * cos(ray_angle - player_angle);
 		double proj_plane_dist = (W_WIDTH / 2.0) / tan(fov_rad / 2.0);
 		int wall_height = (int)((32.0 / corrected_dist) * proj_plane_dist);
 		int wall_top = (W_HEIGHT / 2) - (wall_height / 2);
 		int wall_bot = wall_top + wall_height;
-		//if (wall_top < 0) wall_top = 0;
 		if (wall_bot >= W_HEIGHT) wall_bot = W_HEIGHT - 1;
 		double wall_x;
 		double dx = hit.x - floor(hit.x / 32.0) * 32.0;
 		double dy = hit.y - floor(hit.y / 32.0) * 32.0;
 		if (fabs(dx - 16) > fabs(dy - 16))
-			wall_x = hit.y / 32.0; // mur vertical
+			wall_x = hit.y / 32.0;
 		else
-			wall_x = hit.x / 32.0; // mur horizontal
+			wall_x = hit.x / 32.0;
 		wall_x -= floor(wall_x);
 		int tex_x = (int)(wall_x * tex->width);
 		for (int y = wall_top; y < wall_bot; y++)
