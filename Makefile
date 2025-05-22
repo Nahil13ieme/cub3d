@@ -3,7 +3,7 @@ NAME        = cub3d
 
 # ⚙️ Compilateur et flags
 CC          = cc
-CFLAGS      =  -g -DDEBUG=$(DEBUG)
+CFLAGS      = -Wall -Wextra -Werror -g -DDEBUG=$(DEBUG)
 
 # 📁 Répertoires
 SRC_DIR     = src/
