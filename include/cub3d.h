@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/16 15:08:28 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/05/22 14:38:35 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 # include "game.h"
 # include "keys.h"
 
+typedef struct s_bbox		t_bbox;
+
 int			check_file_name(char *av, int len);
 int			check_file(char *av);
 
@@ -40,6 +42,9 @@ int			check_border(t_map map);
 int			ft_tablen(char	**tab);
 
 void	ft_free_map(char **all);
+
+int		check_collisions(t_bbox player, int rows, int cols);
+void	set_player_box(t_game	*game);
 
 # define TRUE 1
 # define FALSE 0

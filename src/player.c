@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:15:02 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/16 16:10:05 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/05/22 14:24:28 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_player	*ft_init_player(t_game *game)
 	if (!player)
 		return (NULL);
 	player = init_player_value(player);
+	set_player_box(game);
 	map = game->map->tiles;
 	if (map == NULL)
 		return (free(player), NULL);
@@ -61,22 +62,29 @@ t_player	*ft_init_player(t_game *game)
 	return (printf("Error\nNo Starting Pos\n"), NULL);
 }
 
-void	apply_velocity(t_game	*game)
+void	apply_velocity(t_game *game)
 {
-	if ((game->player->up == 1 && game->player->right == 1) ||
-		(game->player->up == 1 && game->player->left == 1) ||
-		(game->player->down == 1 && game->player->right == 1) ||
-		(game->player->down == 1 && game->player->left == 1))
-		{
-			game->player->pos.x += game->player->velocity.x / 1.5;
-			game->player->pos.y += game->player->velocity.y / 1.5;
-		}
-	else
+	t_player *player = game->player;
+	t_bbox future;
+
+	// Simule la bbox future AVANT de déplacer le joueur
+	future = player->box;
+	if ((player->up == 1 && player->right == 1) ||
+		(player->up == 1 && player->left == 1) ||
+		(player->down == 1 && player->right == 1) ||
+		(player->down == 1 && player->left == 1))
 	{
-		game->player->pos.x += game->player->velocity.x;
-		game->player->pos.y += game->player->velocity.y;
+		future.pos.x += player->velocity.x / 1.5;
+		future.pos.y += player->velocity.y / 1.5;
 	}
+	if (check_collisions(future, game->map->height, game->map->width) == 0)
+	{
+		player->pos.x += player->velocity.x;
+		player->pos.y += player->velocity.y;
+	}
+	set_player_box(game);
 }
+
 
 void	destroy_player(t_player *player)
 {

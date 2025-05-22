@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:10:34 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/16 16:03:19 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/05/22 13:37:58 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 typedef struct s_vector2d	t_vector2d;
 typedef struct s_game		t_game;
+
 
 typedef struct s_bbox
 {
