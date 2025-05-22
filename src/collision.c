@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 14:28:03 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/05/22 14:42:08 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/05/22 14:59:10 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	set_player_box(t_game	*game)
 
 int	check_collisions(t_bbox player, int rows, int cols)
 {
-	if (player.pos.x < 1 || player.pos.y < 1 || (player.pos.x + 1) > cols - 1 || (player.pos.y + 1) > rows - 1)
+	if (player.pos.x < 1 || player.pos.y < 1 || (player.pos.x) > cols - 1 || (player.pos.y) > rows)
 		return (1);
 	return (0);
 }
