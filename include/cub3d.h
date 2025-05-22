@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/18 16:17:42 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/22 17:10:46 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ int			check_file(char *av);
 t_map		*ft_init_map(char *path);
 void		init_input(t_game *game);
 int			check_border(t_map map);
+int			ft_tablen(char	**tab);
+
+void	ft_free_map(char **all);
 
 # define TRUE 1
 # define FALSE 0

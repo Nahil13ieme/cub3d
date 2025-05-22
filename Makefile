@@ -69,7 +69,7 @@ $(OBJ_DIR)vector/%.o: $(VEC_DIR)%.c
 # 📦 Librairies
 $(LIBFT_LIB):
 	@echo "$(BLUE)📦 Building libft...$(RESET)"
-	@make -C $(LIBFT_DIR)
+	@make -C $(LIBFT_DIR) re
 
 $(MLX_LIB):
 	@echo "$(BLUE)📦 Building MLX...$(RESET)"
@@ -93,7 +93,16 @@ debug:
 	@$(MAKE) DEBUG=1
 
 mac:
+	@$(MAKE) fclean
+	@make -C $(LIBFT_DIR) re
+	@make -C $(MLX_DIR) re
+	@$(MAKE)
+
+macdebug:
+	@$(MAKE) fclean
+	@make -C $(LIBFT_DIR) fclean
 	@make -C $(LIBFT_DIR)
-	@make -C $(MLX_DIR)
+	@make -C $(MLX_DIR) re
+	@$(MAKE) DEBUG=1
 
 .PHONY: all clean fclean re debug mac

@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:15:02 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/16 14:48:39 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/22 17:10:04 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ t_player	*ft_init_player(t_game *game)
 	if (!player)
 		return (NULL);
 	map = game->map->tiles;
+	if (map == NULL)
+		return (free(player), NULL);
 	player->velocity.x = 0;
 	player->velocity.y = 0;
 	i = 0;
@@ -45,7 +47,7 @@ t_player	*ft_init_player(t_game *game)
 		}
 		i++;
 	}
-	return (printf("No Starting Pos\n"), NULL);
+	return (printf("Error\nNo Starting Pos\n"), NULL);
 }
 
 void	move_player(t_game	*game)

@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:20:51 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/21 14:05:07 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/22 17:07:33 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,11 @@ t_game	*new_game(void *mlx, void *win, int is_debugging, char **av)
 	game->game_state = RUNNING;
 	game->map = ft_init_map(av[1]);
 	game->tex_man = load_textures(game);
+	if (game->map == NULL)
+		return (NULL);
 	game->player = ft_init_player(game);
+	if (game->player == NULL)
+		return (destroy_map(game->map), NULL);
 	game->render = new_render(game);
 	init_input(game);
 	if (is_debugging)
