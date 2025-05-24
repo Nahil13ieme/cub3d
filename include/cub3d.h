@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/22 17:17:47 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/24 03:47:04 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@
 # include "raycast.h"
 # include "render.h"
 # include "game.h"
+# include "keys.h"
+
+typedef struct s_bbox		t_bbox;
 
 int			check_file_name(char *av, int len);
 int			check_file(char *av);
@@ -42,8 +45,13 @@ int			ft_tablen(char	**tab);
 
 void	ft_free_map(char **all);
 
+int		check_collisions(t_bbox player, int rows, int cols);
+void	set_player_box(t_game	*game);
+
 # define TRUE 1
 # define FALSE 0
+
+# define SIZE 64
 
 # define BUFFER_SIZE sizeof(char *)
 
