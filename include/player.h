@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:10:34 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/24 03:50:23 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/24 03:52:12 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_player
 
 
 t_player	*ft_init_player(t_game *game);
-void		apply_velocity(t_game	*game);
+void		move_player(t_game	*game);
 void		destroy_player(t_player *player);
 
 

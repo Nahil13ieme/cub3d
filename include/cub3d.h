@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/24 03:47:04 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/24 03:55:45 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int			ft_tablen(char	**tab);
 void	ft_free_map(char **all);
 
 int		check_collisions(t_bbox player, int rows, int cols);
-void	set_player_box(t_game	*game);
+void	set_player_box(t_player *player);
 
 # define TRUE 1
 # define FALSE 0

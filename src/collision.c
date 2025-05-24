@@ -3,25 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   collision.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 14:28:03 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/05/22 14:59:10 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/05/24 03:56:21 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	set_player_box(t_game	*game)
+void	set_player_box(t_player *player)
 {
-	float		x;
-	float		y;
+	// float		x;
+	// float		y;
 
-	x = game->player->pos.x;
-	y = game->player->pos.y;
-
-	game->player->box.pos = vector2d(game->player->pos.x, game->player->pos.y);
-	game->player->box.size = vector2d(SIZE,SIZE);
+	// x = game->player->pos.x;
+	// y = game->player->pos.y;
+	player->box.pos = vector2d(player->pos.x, player->pos.y);
+	player->box.size = vector2d(SIZE,SIZE);
 
 }
 

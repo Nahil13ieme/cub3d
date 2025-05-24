@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:15:02 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/24 03:46:49 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/24 03:56:12 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,20 @@ static void	set_player_dir(t_player *player, char c)
 		player->dir = vector2d(1, 0);
 }
 
+static t_player	*init_player_value(t_player *player)
+{
+	player->down = 0;
+	player->up = 0;
+	player->left = 0;
+	player->right = 0;
+	player->maj = 0;
+	player->velocity.x = 0;
+	player->velocity.y = 0;
+	player->destroy = destroy_player;
+	player->speed = SPEED;
+	return (player);
+}
+
 t_player	*ft_init_player(t_game *game)
 {
 	int			i;
@@ -35,7 +49,7 @@ t_player	*ft_init_player(t_game *game)
 	if (!player)
 		return (NULL);
 	player = init_player_value(player);
-	set_player_box(game);
+	set_player_box(player);
 	map = game->map->tiles;
 	if (map == NULL)
 		return (free(player), NULL);
@@ -62,7 +76,7 @@ t_player	*ft_init_player(t_game *game)
 	return (printf("Error\nNo Starting Pos\n"), NULL);
 }
 
-void	apply_velocity(t_game *game)
+void	move_player(t_game *game)
 {
 	t_player *player = game->player;
 	t_bbox future;
@@ -82,7 +96,7 @@ void	apply_velocity(t_game *game)
 		player->pos.x += player->velocity.x;
 		player->pos.y += player->velocity.y;
 	}
-	set_player_box(game);
+	set_player_box(game->player);
 }
 
 

@@ -7,7 +7,8 @@
 		"texture.h": "c",
 		"render.h": "c",
 		"cmath": "c",
-		"stdbool.h": "c"
+		"stdbool.h": "c",
+		"raycast.h": "c"
 	},
 	"C_Cpp.errorSquiggles": "disabled"
 }
