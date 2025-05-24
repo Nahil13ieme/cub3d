@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:20:51 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/24 03:46:31 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/24 04:21:16 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,27 +48,31 @@ void	input(t_game *game)
 	t_vector2d	*v;
 
 	v = &game->player->velocity;
-	if (game->input.right)
-		game->player->dir = vector2d_rotate(game->player->dir, -0.1f);
+	if (game->input.maj)
+		game->player->speed = 0.1f;
+	else
+		game->player->speed = 0.05f;
 	if (game->input.left)
+		game->player->dir = vector2d_rotate(game->player->dir, -0.1f);
+	if (game->input.right)
 		game->player->dir = vector2d_rotate(game->player->dir, 0.1f);
 	*v = vector2d(0, 0);
 	if (game->input.w)
-		*v = vector2d_add(*v, vector2d_scale(game->player->dir, 0.05f));
+		*v = vector2d_add(*v, vector2d_scale(game->player->dir, game->player->speed));
 	if (game->input.s)
-		*v = vector2d_substract(*v, vector2d_scale(game->player->dir, 0.05f));
+		*v = vector2d_substract(*v, vector2d_scale(game->player->dir, game->player->speed));
 	if (game->input.a)
 	{
-		v->x += game->player->dir.y * 0.05f;
-		v->y -= game->player->dir.x * 0.05f;
+		v->x += game->player->dir.y * game->player->speed;
+		v->y -= game->player->dir.x * game->player->speed;
 	}
 	if (game->input.d)
 	{
-		v->x -= game->player->dir.y * 0.05f;
-		v->y += game->player->dir.x * 0.05f;
+		v->x -= game->player->dir.y * game->player->speed;
+		v->y += game->player->dir.x * game->player->speed;
 	}
-    if (vector2d_length(*v) > 0.05f)
-        *v = vector2d_scale(vector2d_normalize(*v), 0.05f);
+    if (vector2d_length(*v) > game->player->speed)
+        *v = vector2d_scale(vector2d_normalize(*v), game->player->speed);
 }
 
 int	game_loop(t_game *game)
@@ -108,6 +112,8 @@ int	handle_key_release(int keycode, t_game *game)
 		game->input.left = false;
 	if (keycode == KEY_RIGHT)
 		game->input.right = false;
+	if (keycode == KEY_MAJ)
+		game->input.maj = false;
 	return (0);
 }
 
@@ -127,6 +133,8 @@ int	key_hook(int keycode, t_game *game)
 		game->input.left = true;
 	if (keycode == KEY_RIGHT)
 		game->input.right = true;
+	if (keycode == KEY_MAJ)
+		game->input.maj = true;
 	return (0);
 }
 

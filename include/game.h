@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 17:10:44 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/24 03:50:52 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/24 04:19:45 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_input
 	bool	d;
 	bool	left;
 	bool	right;
+	bool	maj;
 }	t_input;
  
 typedef enum e_game_state

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 15:06:19 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/05/16 16:01:07 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/05/24 04:20:08 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define KEY_RIGHT 65363
 # define KEY_LEFT 65361
 # define KEY_MAJ 65505
+# define KEY_ESC 65307
 
 void		identify_move(t_game *game);
 int			ft_key_pressed(int keycode, void *param);

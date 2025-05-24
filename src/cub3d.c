@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 15:43:10 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/16 15:48:25 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/05/24 04:11:34 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ int	main(int ac, char **av)
 	game = new_game(mlx, win, DEBUG, av);
 	if (!game)
 		return (1);
-	mlx_hook(game->win, 2, 1L << 0, ft_key_pressed, game);
-	mlx_hook(game->win, 3, 1L << 1, ft_key_release, game);
 	mlx_loop_hook(game->mlx, game_loop, game);
+	mlx_hook(game->win, 2, 1L << 0, key_hook, game);
+	mlx_hook(game->win, 3, 1L << 1, handle_key_release, game);
 	mlx_loop(mlx);
 	return (0);
 }

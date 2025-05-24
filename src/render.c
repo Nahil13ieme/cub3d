@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:16:01 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/22 17:31:00 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/24 04:33:35 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	draw_walls(t_game *game)
 	double			player_angle = atan2(game->player->dir.y, game->player->dir.x);
 	t_vector2d		player = vector2d_scale(game->player->pos, 32);
 	t_texture		*tex;
-	int				side;
+	int			side;
 	if (!game->tex_man->wall_east || !game->tex_man->wall_south
 		|| !game->tex_man->wall_north || !game->tex_man->wall_west)
 		return ;
@@ -111,6 +111,11 @@ void	draw_walls(t_game *game)
 		double ray_angle = angle_start + ((double)col / W_WIDTH) * (fov_rad);
 		t_vector2d dir = { cos(ray_angle), sin(ray_angle) };
 		t_vector2d hit = raycast_to_wall(game, player, dir, &side);
+
+		// Skip if hit is out of map bounds
+		if (hit.x < 0 || hit.y < 0 || hit.x >= game->map->width * 32 || hit.y >= game->map->height * 32)
+			continue;
+
 		if (side == 0)
 			tex = game->tex_man->wall_south;
 		else if (side == 1)
@@ -119,7 +124,11 @@ void	draw_walls(t_game *game)
 			tex = game->tex_man->wall_west;
 		else if (side == 3)
 			tex = game->tex_man->wall_east;
+		if (!tex)
+			continue;
 		double dist = hypot(hit.x - player.x, hit.y - player.y);
+		if (dist < 0.05f)
+			continue;
 		double corrected_dist = dist * cos(ray_angle - player_angle);
 		double proj_plane_dist = (W_WIDTH / 2.0) / tan(fov_rad / 2.0);
 		int wall_height = (int)((32.0 / corrected_dist) * proj_plane_dist);
@@ -135,17 +144,24 @@ void	draw_walls(t_game *game)
 			wall_x = hit.x / 32.0;
 		wall_x -= floor(wall_x);
 		int tex_x = (int)(wall_x * tex->width);
+		if (tex_x < 0 || tex_x >= tex->width)
+			continue;
 		for (int y = wall_top; y < wall_bot; y++)
 		{
 			double tex_pos = (double)(y - wall_top) / wall_height;
 			int tex_y = (int)(tex_pos * tex->height);
+			if (tex_y < 0 || tex_y >= tex->height)
+				continue;
 			int tex_i = tex_y * tex->line_len + tex_x * (tex->bpp / 8);
 			unsigned char *buf = (unsigned char *)tex->buffer;
+			if (tex_i + 2 >= tex->line_len * tex->height)
+				continue;
 			int color = (buf[tex_i + 2] << 16) | (buf[tex_i + 1] << 8) | buf[tex_i];
 			draw_pixel(game->render->main_buffer, col, y, color);
 		}
 	}
 }
+
 
 
 void	draw_buffer(t_game *game)

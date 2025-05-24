@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 12:16:34 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/22 17:24:12 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/24 04:27:55 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,12 @@ static int	perform_dda(t_game *game, t_raycast *ray)
 			side = 1;
 		}
 		if (ray->map_x < 0 || ray->map_y < 0
-			|| game->map->tiles[ray->map_y][ray->map_x] == '1'
 			|| ray->map_y >= game->map->height
-			|| ray->map_x >= game->map->width)
+			|| ray->map_x >= game->map->width
+			|| game->map->tiles[ray->map_y][ray->map_x] == '1')
 			{
-				if ((ray->map_x >= 0 && ray->map_y >= 0) && game->map->tiles[ray->map_y][ray->map_x] == '1')
+				if (((ray->map_x >= 0 && ray->map_y >= 0) && ray->map_y < game->map->height && ray->map_x < game->map->width)
+				&& game->map->tiles[ray->map_y][ray->map_x] == '1')
 				{
 					if (side == 0)
 						ray->side_hit = (ray->step.x > 0) ? 2 : 3;
