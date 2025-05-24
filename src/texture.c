@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 17:01:17 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/22 16:33:49 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/23 15:48:19 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ t_texture_manager	*load_textures(t_game *game)
 	tex_man = malloc(sizeof(t_texture_manager));
 	if (!tex_man)
 		return (NULL);
-	tex_man->wall_north = new_texture_from_file(game->mlx, "asset/wall_north.xpm");
-	tex_man->wall_south = new_texture_from_file(game->mlx, "asset/wall_south.xpm");
-	tex_man->wall_east = new_texture_from_file(game->mlx, "asset/wall_east.xpm");
-	tex_man->wall_west = new_texture_from_file(game->mlx, "asset/wall_west.xpm");
+	tex_man->wall_north = new_texture_from_file(game->mlx, "asset/wall_south2.xpm");
+	tex_man->wall_south = new_texture_from_file(game->mlx, "asset/wall_south2.xpm");
+	tex_man->wall_east = new_texture_from_file(game->mlx, "asset/wall_north.xpm");
+	tex_man->wall_west = new_texture_from_file(game->mlx, "asset/wall_north.xpm");
 	return (tex_man);
 }

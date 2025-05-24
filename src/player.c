@@ -6,11 +6,23 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:15:02 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/22 17:10:04 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/23 00:33:24 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/player.h"
+
+static void	set_player_dir(t_player *player, char c)
+{
+	if (c == 'N')
+		player->dir = vector2d(0, -1);
+	else if (c == 'S')
+		player->dir = vector2d(0, 1);
+	else if (c == 'E')
+		player->dir = vector2d(-1, 0);
+	else if (c == 'Z')
+		player->dir = vector2d(1, 0);
+}
 
 t_player	*ft_init_player(t_game *game)
 {
@@ -37,10 +49,10 @@ t_player	*ft_init_player(t_game *game)
 		{
 			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'E' || map[i][j] == 'W')
 			{
-				player->pos.x = j;
-				player->pos.y = i;
+				player->pos.x = (float)j + 0.5f;
+				player->pos.y = (float)i + 0.5f;
 				game->map->start = vector2d(j, i);
-				player->dir = vector2d(0, -1);
+				set_player_dir(player, map[i][j]);
 				return (player);
 			}
 			j++;
@@ -61,8 +73,5 @@ void	move_player(t_game	*game)
 
 void	destroy_player(t_player *player)
 {
-	t_player	*fplayer;
-
-	fplayer = (t_player *)player;
-	free(fplayer);
+	free(player);
 }

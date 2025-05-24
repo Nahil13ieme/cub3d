@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:16:01 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/22 16:35:17 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/22 17:31:00 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,9 @@ void	draw_walls(t_game *game)
 	t_vector2d		player = vector2d_scale(game->player->pos, 32);
 	t_texture		*tex;
 	int				side;
-
+	if (!game->tex_man->wall_east || !game->tex_man->wall_south
+		|| !game->tex_man->wall_north || !game->tex_man->wall_west)
+		return ;
 	for (int col = 0; col < W_WIDTH; col++)
 	{
 		double ray_angle = angle_start + ((double)col / W_WIDTH) * (fov_rad);
@@ -138,7 +140,7 @@ void	draw_walls(t_game *game)
 			double tex_pos = (double)(y - wall_top) / wall_height;
 			int tex_y = (int)(tex_pos * tex->height);
 			int tex_i = tex_y * tex->line_len + tex_x * (tex->bpp / 8);
-			unsigned char *buf = tex->buffer;
+			unsigned char *buf = (unsigned char *)tex->buffer;
 			int color = (buf[tex_i + 2] << 16) | (buf[tex_i + 1] << 8) | buf[tex_i];
 			draw_pixel(game->render->main_buffer, col, y, color);
 		}
