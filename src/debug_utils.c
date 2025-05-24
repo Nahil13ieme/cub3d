@@ -6,11 +6,12 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 19:59:32 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/22 16:25:16 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/24 03:59:42 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+#include <sys/time.h>
 
 long	get_time_microseconds(void)
 {
@@ -42,7 +43,7 @@ void	raycast_cone(t_game *game, t_texture *t)
 		ray_angle = start_angle + (fov_rad / num_rays) * i;
 		dir.x = cos(ray_angle);
 		dir.y = sin(ray_angle);
-		target = raycast_to_wall(game, player, dir, side);
+		target = raycast_to_wall(game, player, dir, &side);
 		draw_line(t, player, target, 0xFF0000);
 		i++;
 	}
