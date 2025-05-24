@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 12:16:34 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/24 04:27:55 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/24 05:17:04 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,53 @@ static void	init_raycast_vars(t_raycast *ray, t_vector2d origin, t_vector2d dir)
 	}
 }
 
+static int	is_collision(t_raycast *ray, t_game *game)
+{
+	if (ray->map_x < 0 || ray->map_y < 0)
+		return (1);
+	if (ray->map_y >= game->map->height)
+		return (1);
+	if (ray->map_x >= game->map->width)
+		return (1);
+	if (game->map->tiles[ray->map_y][ray->map_x] == '1')
+		return (1);
+	return (0);
+}
+
+static void	set_side_for_x_bounds(t_raycast *ray)
+{
+	if (ray->step.x > 0)
+		ray->side_hit = 2;
+	else
+		ray->side_hit = 3;
+}
+
+static void	set_side_for_y_bounds(t_raycast *ray)
+{
+	if (ray->step.y > 0)
+		ray->side_hit = 1;
+	else
+		ray->side_hit = 0;
+}
+
+static void	set_side_for_wall(t_raycast *ray, int side)
+{
+	if (side == 0)
+		set_side_for_x_bounds(ray);
+	else
+		set_side_for_y_bounds(ray);
+}
+
+static void	set_side_hit(t_raycast *ray, t_game *game, int side)
+{
+	if (ray->map_x < 0 || ray->map_x >= game->map->width)
+		set_side_for_x_bounds(ray);
+	else if (ray->map_y < 0 || ray->map_y >= game->map->height)
+		set_side_for_y_bounds(ray);
+	else if (game->map->tiles[ray->map_y][ray->map_x] == '1')
+		set_side_for_wall(ray, side);
+}
+
 static int	perform_dda(t_game *game, t_raycast *ray)
 {
 	int	side;
@@ -92,21 +139,11 @@ static int	perform_dda(t_game *game, t_raycast *ray)
 			ray->map_y += ray->step.y;
 			side = 1;
 		}
-		if (ray->map_x < 0 || ray->map_y < 0
-			|| ray->map_y >= game->map->height
-			|| ray->map_x >= game->map->width
-			|| game->map->tiles[ray->map_y][ray->map_x] == '1')
-			{
-				if (((ray->map_x >= 0 && ray->map_y >= 0) && ray->map_y < game->map->height && ray->map_x < game->map->width)
-				&& game->map->tiles[ray->map_y][ray->map_x] == '1')
-				{
-					if (side == 0)
-						ray->side_hit = (ray->step.x > 0) ? 2 : 3;
-					else
-						ray->side_hit = (ray->step.y > 0) ? 1 : 0;
-				}	
-				break ;
-			}
+		if (is_collision(ray, game))
+		{
+			set_side_hit(ray, game, side);
+			break ;
+		}
 	}
 	return (side);
 }

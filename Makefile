@@ -12,7 +12,7 @@ OBJ_DIR     = obj/
 
 # 📄 Fichiers source
 SRC         = cub3d.c check_file.c game.c debug.c draw.c debug_utils.c \
-			  render.c map.c player.c texture.c \
+			  render.c map.c player.c texture.c raycasting.c\
 			  init.c check_map.c check_border.c keys.c collision.c\
 
 VECTOR      = vector2d.c vector2d_math.c

@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 15:42:03 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/18 15:28:18 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/24 04:40:50 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,5 @@ t_render	*new_render(t_game	*game);
 void		draw_buffer(t_game *game);
 int			render_loop(t_game *game);
 void		destroy_render(t_render *render);
+void	draw_walls(t_game *game);
 #endif /* RENDER_H */
