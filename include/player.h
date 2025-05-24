@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:10:34 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/24 03:47:23 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/24 03:50:23 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,14 @@
 
 typedef struct s_vector2d	t_vector2d;
 typedef struct s_game		t_game;
+
+typedef struct s_bbox
+{
+	t_vector2d	pos;
+	t_vector2d	size;
+}	t_bbox;
+
+
 typedef struct s_player
 {
 	float		hp;

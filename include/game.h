@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 17:10:44 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/24 03:47:14 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/24 03:50:52 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,6 @@
 
 # include "cub3d.h"
 # include <stdbool.h>
-
-# define KEY_W 119
-# define KEY_A 97
-# define KEY_S 115
-# define KEY_D 100
-# define KEY_RIGHT 65361
-# define KEY_LEFT 65363
 
 typedef struct s_map				t_map;
 typedef struct s_debug				t_debug;
@@ -38,8 +31,7 @@ typedef struct s_input
 	bool	left;
 	bool	right;
 }	t_input;
-
-
+ 
 typedef enum e_game_state
 {
 	NONE,
