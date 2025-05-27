@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:16:01 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/24 04:52:22 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/27 14:16:11 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,39 +32,40 @@ t_render	*new_render(t_game *game)
 	return (r);
 }
 
-void draw_img_to_buffer(t_texture *buffer, t_texture *sprite, int x_offset, int y_offset)
+void	draw_img_to_buffer(t_texture *buffer, t_texture *sprite, int x_offset,
+		int y_offset)
 {
-    int             y;
-    int             x;
-    char            *src_pixel;
-    unsigned int    color;
-    char            *dst_pixel;
+	int				y;
+	int				x;
+	char			*src_pixel;
+	unsigned int	color;
+	char			*dst_pixel;
 
-    if (!buffer->buffer || !sprite->buffer)
-        return;
-    y = -1;
-    while (++y < sprite->height)
-    {
-        // Vérifier si le pixel est dans les limites du buffer de destination
-        if (y + y_offset < 0 || y + y_offset >= buffer->height)
-            continue;
-            
-        x = -1;
-        while (++x < sprite->width)
-        {
-            // Vérifier si le pixel est dans les limites du buffer de destination
-            if (x + x_offset < 0 || x + x_offset >= buffer->width)
-                continue;
-                
-            src_pixel = sprite->buffer + (y * sprite->line_len) + (x * (sprite->bpp / 8));
-            color = *(unsigned int *)src_pixel;
-            if (color && color != 0xFF000000)
-            {
-                dst_pixel = buffer->buffer + ((y + y_offset) * buffer->line_len) + ((x + x_offset) * (buffer->bpp / 8));
-                *(unsigned int *)dst_pixel = color;
-            }
-        }
-    }
+	if (!buffer->buffer || !sprite->buffer)
+		return ;
+	y = -1;
+	while (++y < sprite->height)
+	{
+		// Vérifier si le pixel est dans les limites du buffer de destination
+		if (y + y_offset < 0 || y + y_offset >= buffer->height)
+			continue ;
+		x = -1;
+		while (++x < sprite->width)
+		{
+			// Vérifier si le pixel est dans les limites du buffer de destinati
+			if (x + x_offset < 0 || x + x_offset >= buffer->width)
+				continue ;
+			src_pixel = sprite->buffer + (y * sprite->line_len)
+				+ (x * (sprite->bpp / 8));
+			color = *(unsigned int *)src_pixel;
+			if (color && color != 0xFF000000)
+			{
+				dst_pixel = buffer->buffer + ((y + y_offset) * buffer->line_len)
+					+ ((x + x_offset) * (buffer->bpp / 8));
+				*(unsigned int *)dst_pixel = color;
+			}
+		}
+	}
 }
 
 void	draw_floor(t_game *game)
@@ -98,7 +99,8 @@ void	draw_floor(t_game *game)
 // void	draw_walls(t_game *game)
 // {
 // 	double			fov_rad = (game->player->fov * M_PI) / 180.0;
-// 	double			angle_start = atan2(game->player->dir.y, game->player->dir.x) - fov_rad / 2;
+// 	double			angle_start = atan2(game->player->dir.y,
+//							game->player->dir.x) - fov_rad / 2;
 // 	double			player_angle = atan2(game->player->dir.y, game->player->dir.x);
 // 	t_vector2d		player = vector2d_scale(game->player->pos, 32);
 // 	t_texture		*tex;
@@ -161,8 +163,6 @@ void	draw_floor(t_game *game)
 // 		}
 // 	}
 // }
-
-
 
 void	draw_buffer(t_game *game)
 {
@@ -229,6 +229,7 @@ void	clear_buffer(t_texture *t)
 {
 	int	x;
 	int	y;
+	int	i;
 
 	y = 0;
 	while (y < t->height)
@@ -236,7 +237,7 @@ void	clear_buffer(t_texture *t)
 		x = 0;
 		while (x < t->width)
 		{
-			int i = y * t->line_len + x * (t->bpp / 8);
+			i = y * t->line_len + x * (t->bpp / 8);
 			t->buffer[i + 0] = 0; // Bleu
 			t->buffer[i + 1] = 0; // Vert
 			t->buffer[i + 2] = 0; // Rouge
@@ -275,18 +276,20 @@ void	draw_debug_buffer(t_game *game)
 	}
 }
 
-int		render_loop(t_game *game)
+int	render_loop(t_game *game)
 {
 	mlx_clear_window(game->mlx, game->win);
 	clear_buffer(game->render->main_buffer);
 	draw_buffer(game);
-	mlx_put_image_to_window(game->mlx, game->win, game->render->main_buffer->img_ptr, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->win,
+		game->render->main_buffer->img_ptr, 0, 0);
 	if (game->is_debugging)
 	{
 		mlx_clear_window(game->mlx, game->debug->win);
 		clear_buffer(game->render->debug_buffer);
 		draw_debug_buffer(game);
-		mlx_put_image_to_window(game->mlx, game->debug->win, game->render->debug_buffer->img_ptr, 0, 0);
+		mlx_put_image_to_window(game->mlx, game->debug->win,
+			game->render->debug_buffer->img_ptr, 0, 0);
 	}
 	return (1);
 }

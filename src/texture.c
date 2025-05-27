@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 17:01:17 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/23 15:48:19 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/27 14:09:45 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ t_texture	*new_texture_from_file(void *mlx, char *file)
 		free(t);
 		return (NULL);
 	}
-	t->buffer = mlx_get_data_addr(t->img_ptr, &t->bpp, &t->line_len, &t->endian);
+	t->buffer = mlx_get_data_addr(t->img_ptr, &t->bpp, &t->line_len,
+			&t->endian);
 	t->width = width;
 	t->height = height;
 	return (t);
 }
-
 
 t_texture	*new_texture(void *mlx, int width, int height)
 {
@@ -43,7 +43,8 @@ t_texture	*new_texture(void *mlx, int width, int height)
 	if (!t)
 		return (NULL);
 	t->img_ptr = mlx_new_image(mlx, width, height);
-	t->buffer = mlx_get_data_addr(t->img_ptr, &t->bpp, &t->line_len, &t->endian);
+	t->buffer = mlx_get_data_addr(t->img_ptr, &t->bpp, &t->line_len,
+			&t->endian);
 	t->width = width;
 	t->height = height;
 	return (t);
@@ -56,9 +57,13 @@ t_texture_manager	*load_textures(t_game *game)
 	tex_man = malloc(sizeof(t_texture_manager));
 	if (!tex_man)
 		return (NULL);
-	tex_man->wall_north = new_texture_from_file(game->mlx, "asset/wall_south2.xpm");
-	tex_man->wall_south = new_texture_from_file(game->mlx, "asset/wall_south2.xpm");
-	tex_man->wall_east = new_texture_from_file(game->mlx, "asset/wall_north.xpm");
-	tex_man->wall_west = new_texture_from_file(game->mlx, "asset/wall_north.xpm");
+	tex_man->wall_north = new_texture_from_file(game->mlx,
+			"asset/wall_south2.xpm");
+	tex_man->wall_south = new_texture_from_file(game->mlx,
+			"asset/wall_south2.xpm");
+	tex_man->wall_east = new_texture_from_file(game->mlx,
+			"asset/wall_north.xpm");
+	tex_man->wall_west = new_texture_from_file(game->mlx,
+			"asset/wall_north.xpm");
 	return (tex_man);
 }

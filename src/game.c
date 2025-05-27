@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:20:51 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/24 04:21:16 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/27 14:05:25 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,11 @@ void	input(t_game *game)
 		game->player->dir = vector2d_rotate(game->player->dir, 0.1f);
 	*v = vector2d(0, 0);
 	if (game->input.w)
-		*v = vector2d_add(*v, vector2d_scale(game->player->dir, game->player->speed));
+		*v = vector2d_add(*v, vector2d_scale(game->player->dir,
+					game->player->speed));
 	if (game->input.s)
-		*v = vector2d_substract(*v, vector2d_scale(game->player->dir, game->player->speed));
+		*v = vector2d_substract(*v, vector2d_scale(game->player->dir,
+					game->player->speed));
 	if (game->input.a)
 	{
 		v->x += game->player->dir.y * game->player->speed;
@@ -71,8 +73,8 @@ void	input(t_game *game)
 		v->x -= game->player->dir.y * game->player->speed;
 		v->y += game->player->dir.x * game->player->speed;
 	}
-    if (vector2d_length(*v) > game->player->speed)
-        *v = vector2d_scale(vector2d_normalize(*v), game->player->speed);
+	if (vector2d_length(*v) > game->player->speed)
+		*v = vector2d_scale(vector2d_normalize(*v), game->player->speed);
 }
 
 int	game_loop(t_game *game)

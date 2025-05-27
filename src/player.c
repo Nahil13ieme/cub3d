@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:15:02 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/24 18:37:30 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/27 14:35:42 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ t_player	*ft_init_player(t_game *game)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'E' || map[i][j] == 'W')
+			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'E'
+				|| map[i][j] == 'W')
 			{
 				player->pos.x = j + 0.5f;
 				player->pos.y = i + 0.5f;
@@ -51,31 +52,32 @@ t_player	*ft_init_player(t_game *game)
 void	move_player(t_game	*game)
 {
 	t_vector2d	new_pos;
+	float		box_size;
 
-	// Define a small box around the player for collision detection
-	float	box_size = 0.1f;
-
-	// Attempt to move along the x-axis
+	box_size = 0.1f;
 	new_pos.x = game->player->pos.x + game->player->velocity.x * 0.5;
-	if (new_pos.x - box_size >= 0 && new_pos.x + box_size < game->map->width &&
-		game->map->tiles[(int)(game->player->pos.y - box_size)][(int)(new_pos.x - box_size)] != '1' &&
-		game->map->tiles[(int)(game->player->pos.y + box_size)][(int)(new_pos.x - box_size)] != '1' &&
-		game->map->tiles[(int)(game->player->pos.y - box_size)][(int)(new_pos.x + box_size)] != '1' &&
-		game->map->tiles[(int)(game->player->pos.y + box_size)][(int)(new_pos.x + box_size)] != '1')
-	{
+	if (new_pos.x - box_size >= 0 && new_pos.x + box_size < game->map->width
+		&& game->map->tiles[(int)(game->player->pos.y - box_size)][(int)
+			(new_pos.x - box_size)] != '1'
+		&& game->map->tiles[(int)(game->player->pos.y + box_size)][(int)
+			(new_pos.x - box_size)] != '1'
+		&& game->map->tiles[(int)(game->player->pos.y - box_size)][(int)
+			(new_pos.x + box_size)] != '1'
+		&& game->map->tiles[(int)(game->player->pos.y + box_size)][(int)
+			(new_pos.x + box_size)] != '1')
 		game->player->pos.x = new_pos.x;
-	}
-
 	// Attempt to move along the y-axis
 	new_pos.y = game->player->pos.y + game->player->velocity.y * 0.5;
-	if (new_pos.y - box_size >= 0 && new_pos.y + box_size < game->map->height &&
-		game->map->tiles[(int)(new_pos.y - box_size)][(int)(game->player->pos.x - box_size)] != '1' &&
-		game->map->tiles[(int)(new_pos.y + box_size)][(int)(game->player->pos.x - box_size)] != '1' &&
-		game->map->tiles[(int)(new_pos.y - box_size)][(int)(game->player->pos.x + box_size)] != '1' &&
-		game->map->tiles[(int)(new_pos.y + box_size)][(int)(game->player->pos.x + box_size)] != '1')
-	{
+	if (new_pos.y - box_size >= 0 && new_pos.y + box_size < game->map->height
+		&& game->map->tiles[(int)(new_pos.y - box_size)]
+			[(int)(game->player->pos.x - box_size)] != '1'
+		&& game->map->tiles[(int)(new_pos.y + box_size)]
+			[(int)(game->player->pos.x - box_size)] != '1'
+		&& game->map->tiles[(int)(new_pos.y - box_size)]
+			[(int)(game->player->pos.x + box_size)] != '1'
+		&& game->map->tiles[(int)(new_pos.y + box_size)]
+			[(int)(game->player->pos.x + box_size)] != '1')
 		game->player->pos.y = new_pos.y;
-	}
 }
 
 void	destroy_player(t_player *player)
