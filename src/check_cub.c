@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 13:03:52 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/05/29 14:54:48 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/05/29 15:03:08 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	copy_map(t_map *map, char **tab, int i)
 		k++;
 		i++;
 	}
+	map->tiles[k] = 0;
 }
 
 
