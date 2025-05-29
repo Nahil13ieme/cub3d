@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:16:35 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/14 12:50:36 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/29 13:05:09 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct s_map
 	int			height;
 	char		dir;
 	char		**tiles;
+	char		**tab;
 	t_vector2d	start;
 	void		(*destroy)(struct s_map *map);
 	//objects if any

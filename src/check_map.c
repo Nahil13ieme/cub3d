@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 12:56:34 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/05/27 13:58:24 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/05/29 13:40:43 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	check_size_line(t_map *map)
 	}
 }
 
-t_map	*ft_init_map(char *path)
+t_map	*ft_init_map(char *path, t_game *game)
 {
 	int		fd;
 	t_map	*map;
@@ -118,8 +118,9 @@ t_map	*ft_init_map(char *path)
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		return (printf("Error\nfile reading\n"), NULL);
-	map->tiles = ft_init_tab(fd);
+	map->tab = ft_init_tab(fd);
 	close(fd);
+	check_cub(game, map);
 	if (map->tiles == NULL)
 		return (printf("Error\nmap is not load"), NULL);
 	map->height = ft_tablen(map->tiles);

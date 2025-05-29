@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/24 03:55:45 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/29 13:39:41 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_bbox		t_bbox;
 int			check_file_name(char *av, int len);
 int			check_file(char *av);
 
-t_map		*ft_init_map(char *path);
+t_map		*ft_init_map(char *path, t_game *game);
 void		init_input(t_game *game);
 int			check_border(t_map map);
 int			ft_tablen(char	**tab);
@@ -47,6 +47,9 @@ void	ft_free_map(char **all);
 
 int		check_collisions(t_bbox player, int rows, int cols);
 void	set_player_box(t_player *player);
+
+
+int	check_cub(t_game *game, t_map *map);
 
 # define TRUE 1
 # define FALSE 0

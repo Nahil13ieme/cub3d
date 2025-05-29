@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:20:51 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/27 14:05:25 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/05/29 13:41:30 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_game	*new_game(void *mlx, void *win, int is_debugging, char **av)
 	game->win = win;
 	game->is_debugging = is_debugging;
 	game->game_state = RUNNING;
-	game->map = ft_init_map(av[1]);
+	game->map = ft_init_map(av[1], game);
 	game->tex_man = load_textures(game);
 	if (game->map == NULL)
 		return (NULL);

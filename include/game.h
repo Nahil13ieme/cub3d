@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 17:10:44 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/24 04:19:45 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/29 14:18:29 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,10 @@ typedef struct s_game
 	t_render			*render;
 	t_game_state		game_state;
 	t_input				input;
+	char				*pathn;
+	char				*paths;
+	char				*pathw;
+	char				*pathe;
 	void				(*destroy)(struct s_game *game);
 }	t_game;
 
