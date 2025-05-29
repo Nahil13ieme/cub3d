@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 13:03:52 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/05/29 14:36:37 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/05/29 14:54:48 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	copy_map(t_map *map, char **tab, int i)
 {
-	int	j;
 	int	k;
 	int	l;
 
@@ -25,14 +24,8 @@ void	copy_map(t_map *map, char **tab, int i)
 	map->tiles = malloc(sizeof(char **) * (l - i + 1));
 	while (tab[i])
 	{
-		j = 0;
-		while (tab[i][j])
-		{
-			map->tiles[k] = malloc(sizeof(char *) * (ft_strlen(tab[i]) + 1));
-			map->tiles[k][j] = tab[i][j];
-			j++;
-			k++;
-		}
+		map->tiles[k] = tab[i];
+		k++;
 		i++;
 	}
 }
@@ -61,8 +54,8 @@ int	check_cub(t_game *game, t_map *map)
 	set_texture(&game->paths, map->tab[1]);
 	set_texture(&game->pathw, map->tab[2]);
 	set_texture(&game->pathe, map->tab[3]);
-	game->tex_man->floor = map->tab[5];
-	game->tex_man->cell = map->tab[6];
+	//game->tex_man->floor = map->tab[5];
+	//game->tex_man->cell = map->tab[6];
 
 	return (0);
 }
