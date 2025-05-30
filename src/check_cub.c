@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 13:03:52 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/05/30 14:41:43 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/05/30 15:07:09 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,22 @@ void	copy_map(t_map *map, char **tab, int i)
 
 void	set_texture(char **text, char *str)
 {
-	while (*str && *str != '.')
+	while (*str && *str != ' ')
 		str++;
+	str++;
 	*text = str;
+}
+
+int	init_tex_man(t_game *game)
+{
+	game->tex_man = malloc(sizeof(t_texture_manager));
+	if (!game->tex_man)
+		return (1);
+	game->tex_man->wall_east = NULL;
+	game->tex_man->wall_north = NULL;
+	game->tex_man->wall_west = NULL;
+	game->tex_man->wall_south = NULL;
+	return (0);
 }
 
 int	check_cub(t_game *game, t_map *map)
@@ -51,6 +64,8 @@ int	check_cub(t_game *game, t_map *map)
 				return (printf("Error\nFrom .cub file\n"), 1);
 			}
 	copy_map(map, map->tab, 6);
+	if (init_tex_man(game) == 1)
+		return (printf("Error\nFrom texture\n"), 1);
 	set_texture(&game->pathn, map->tab[0]);
 	set_texture(&game->paths, map->tab[1]);
 	set_texture(&game->pathw, map->tab[2]);

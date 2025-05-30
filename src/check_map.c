@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 12:56:34 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/05/30 14:41:16 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/05/30 14:53:22 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,9 @@ t_map	*ft_init_map(char *path, t_game *game)
 		return (printf("Error\nfile reading\n"), NULL);
 	map->tab = ft_init_tab(fd);
 	close(fd);
-	if (map->tiles == NULL || check_cub(game, map) == 1)
+	if (check_cub(game, map) == 1)
+		return (printf("Error\nmap is not load"), NULL);
+	if (map->tiles == NULL)
 		return (printf("Error\nmap is not load"), NULL);
 	map->height = ft_tablen(map->tiles);
 	while (map->tiles[i])
