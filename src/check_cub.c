@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 13:03:52 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/05/30 15:07:09 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/05/30 15:21:58 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ int	check_cub(t_game *game, t_map *map)
 	set_texture(&game->paths, map->tab[1]);
 	set_texture(&game->pathw, map->tab[2]);
 	set_texture(&game->pathe, map->tab[3]);
-	game->tex_man->floor = map->tab[5];
-	game->tex_man->cell = map->tab[6];
+	game->tex_man->floor = ft_substr(map->tab[4], 2, ft_strlen(map->tab[4]));
+	game->tex_man->cell = ft_substr(map->tab[5], 2, ft_strlen(map->tab[5]));
 
 	return (0);
 }
