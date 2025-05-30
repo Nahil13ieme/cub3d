@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 12:56:34 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/05/29 13:40:43 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/05/30 14:02:14 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,15 +91,18 @@ void	check_size_line(t_map *map)
 {
 	int		i;
 	char	*tmp;
-
+	
 	i = 0;
 	while (i < map->height + 1)
 	{
+		if (ft_strlen(map->tiles[i]) == map->width)
+			map->tiles[i][map->width] = 0;
 		while ((int)ft_strlen(map->tiles[i]) < map->width)
 		{
 			tmp = ft_strjoin(map->tiles[i], " ");
 			free(map->tiles[i]);
 			map->tiles[i] = tmp;
+			i--;
 		}
 		i++;
 	}
