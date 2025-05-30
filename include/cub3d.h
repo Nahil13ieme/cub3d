@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/29 13:39:41 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/05/30 14:25:44 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@ void	set_player_box(t_player *player);
 
 
 int	check_cub(t_game *game, t_map *map);
+
+
+void	free_tab(char **tab);
 
 # define TRUE 1
 # define FALSE 0

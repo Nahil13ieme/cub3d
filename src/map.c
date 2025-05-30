@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:15:26 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/22 17:09:39 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/30 14:28:40 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ t_map	*new_map(void)
 void	destroy_map(t_map *map)
 {
 	free(map->tiles);
+	free(map->tab);
 	free(map);
 }
 

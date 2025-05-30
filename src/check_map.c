@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 12:56:34 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/05/30 14:02:14 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/05/30 14:21:45 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,12 +97,15 @@ void	check_size_line(t_map *map)
 	{
 		if (ft_strlen(map->tiles[i]) == map->width)
 			map->tiles[i][map->width] = 0;
-		while ((int)ft_strlen(map->tiles[i]) < map->width)
+		while ((int)ft_strlen(map->tiles[i]) < map->width && map->tiles[i])
 		{
 			tmp = ft_strjoin(map->tiles[i], " ");
 			free(map->tiles[i]);
 			map->tiles[i] = tmp;
-			i--;
+			if (i > 0)
+				i--;
+			else
+				i = 0;
 		}
 		i++;
 	}
@@ -133,9 +136,7 @@ t_map	*ft_init_map(char *path, t_game *game)
 			map->width = ft_strlen(map->tiles[i]);
 		i++;
 	}
-	printf("height : %d\nwidth : %d\n", map->height, map->width);
 	check_size_line(map);
-	ft_print_tab(map->tiles);
 	if (check_border(*map) == 1)
 		return (printf("Error\nMap Invalide\n"), NULL);
 	return (map);
