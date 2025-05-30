@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 13:03:52 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/05/30 14:07:15 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/05/30 14:41:43 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	check_cub(t_game *game, t_map *map)
 			|| map->tab[4][0]!= 'F'
 			|| map->tab[5][0]!= 'C')
 			{
-				return (printf("Error\n From .cub file"), 1);
+				return (printf("Error\nFrom .cub file\n"), 1);
 			}
 	copy_map(map, map->tab, 6);
 	set_texture(&game->pathn, map->tab[0]);
