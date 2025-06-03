@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:20:51 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/06/03 06:52:32 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/06/03 06:54:23 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,6 @@ void	input(t_game *game)
 		game->player->dir = vector2d_rotate(game->player->dir, 0.1f);
 	*v = vector2d(0, 0);
 	if (game->input.w)
-		*v = vector2d_add(*v, vector2d_scale(game->player->dir,
-					game->player->speed));
 		*v = vector2d_add(*v, vector2d_scale(game->player->dir,
 					game->player->speed));
 	if (game->input.s)

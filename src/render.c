@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:16:01 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/06/03 06:52:46 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/06/03 06:54:53 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,6 @@ void	clear_buffer(t_texture *t)
 	int	x;
 	int	y;
 	int	i;
-	int	i;
 
 	y = 0;
 	while (y < t->height)
@@ -218,7 +217,6 @@ void	draw_debug_buffer(t_game *game)
 	}
 }
 
-int	render_loop(t_game *game)
 int	render_loop(t_game *game)
 {
 	mlx_clear_window(game->mlx, game->win);
