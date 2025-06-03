@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
+/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 12:56:34 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/05/15 14:22:53 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/03 06:34:57 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ char	*ft_strjoinfree(char **s1, char *s2)
 		free(*s1);
 	return (dest);
 }
+
 int	ft_tablen(char	**tab)
 {
 	int	i;
@@ -76,16 +77,16 @@ char	**ft_init_tab(int fd)
 
 void	ft_print_tab(char **tab)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	
 	while (tab[i])
 	{
 		printf("%s\n", tab[i]);
 		i++;
 	}
 }
+
 void	check_size_line(t_map *map)
 {
 	int		i;
@@ -104,35 +105,51 @@ void	check_size_line(t_map *map)
 	}
 }
 
-
-t_map	*ft_init_map(char *path)
+static t_map	*init_map2(t_map *map)
 {
-	int		fd;
-	t_map	*map;
 	int	i;
 
-	map = malloc(sizeof(t_map));
-	map->destroy = destroy_map;
-	i = 0;
-	map->width = 0;
-	fd = open(path, O_RDONLY);
-	if (fd == -1)
-		return (printf("Error\nfile reading\n"), NULL);
-	map->tiles = ft_init_tab(fd);
-	close(fd);
-	if(map->tiles == NULL)
-		return(printf("Error\nmap is not load"), NULL);
 	map->height = ft_tablen(map->tiles);
+	i = 0;
 	while (map->tiles[i])
 	{
 		if (map->width < ft_strlen(map->tiles[i]))
-		map->width = ft_strlen(map->tiles[i]);
+			map->width = ft_strlen(map->tiles[i]);
 		i++;
 	}
 	printf("height : %d\nwidth : %d\n", map->height, map->width);
 	check_size_line(map);
 	ft_print_tab(map->tiles);
 	if (check_border(*map) == 1)
-		return (printf("Error\nMap Invalide\n"), NULL);
+	{
+		printf("Error\nMap Invalide\n");
+		return (NULL);
+	}
 	return (map);
+}
+
+t_map	*ft_init_map(char *path)
+{
+	int		fd;
+	t_map	*map;
+
+	map = malloc(sizeof(t_map));
+	if (!map)
+		return (NULL);
+	map->destroy = destroy_map;
+	map->width = 0;
+	fd = open(path, O_RDONLY);
+	if (fd == -1)
+	{
+		printf("Error\nfile reading\n");
+		return (NULL);
+	}
+	map->tiles = ft_init_tab(fd);
+	close(fd);
+	if (!map->tiles)
+	{
+		printf("Error\nmap is not load");
+		return (NULL);
+	}
+	return (init_map2(map));
 }

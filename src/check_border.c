@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 15:03:53 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/05/22 17:06:34 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/06/03 06:51:27 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	check_horizon(char *str)
 {
 	int	i;
 	int	j;
-	
+
 	i = 0;
 	j = ft_strlen(str) - 1;
 	while (str[i] == ' ')
@@ -30,39 +30,46 @@ int	check_horizon(char *str)
 	return (0);
 }
 
-int	check_verti(char **tab)
+static int	check_top_or_bottom(char **tab, int j, int from_bottom)
 {
 	int	i;
+	int	len;
+
+	len = ft_tablen(tab);
+	if (from_bottom)
+		i = len;
+	else
+		i = 0;
+	while ((from_bottom && i >= 0) || (!from_bottom && i < len))
+	{
+		if (tab[i][j] != ' ' && tab[i][j] != '\n')
+		{
+			if (tab[i][j] != '1')
+			{
+				printf("ligne %d\ncolonne %d\n", i, j);
+				return (1);
+			}
+			break ;
+		}
+		if (from_bottom)
+			i--;
+		else
+			i++;
+	}
+	return (0);
+}
+
+int	check_verti(char **tab)
+{
 	int	j;
 
-	i = 0;
 	j = 0;
-	while (j < ft_strlen(tab[0]))
+	while (j < (int)ft_strlen(tab[0]))
 	{
-		i = 0;
-		while (i < ft_tablen(tab))
-			{
-				if (tab[i][j] != ' ' && tab[i][j] != '\n')
-				{
-					if (tab[i][j] != '1')
-						return (printf("ligne %d\ncolonne %d\n", i, j), 1);
-					else
-						break ;
-				}
-				i++;
-			}
-		i = ft_tablen(tab);
-		while (i >= 0)
-		{
-			if (tab[i][j] != ' ' && tab[i][j] != '\n')
-			{
-				if (tab[i][j] != '1')
-					return (printf("ligne %d \n colonne %d \n", i, j), 1);
-				else
-					break ;
-			}
-			i--;
-		}
+		if (check_top_or_bottom(tab, j, 0))
+			return (1);
+		if (check_top_or_bottom(tab, j, 1))
+			return (1);
 		j++;
 	}
 	return (0);
@@ -83,4 +90,3 @@ int	check_border(t_map map)
 		return (1);
 	return (0);
 }
-

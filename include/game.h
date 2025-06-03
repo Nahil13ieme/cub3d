@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 17:10:44 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/24 04:19:45 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/06/03 06:21:34 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_game
 	void				*mlx;
 	void				*win;
 	int					is_debugging;
+	char				*files[4];
 	t_map				*map;
 	t_texture_manager	*tex_man;
 	t_debug				*debug;
