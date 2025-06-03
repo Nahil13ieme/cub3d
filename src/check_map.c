@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 12:56:34 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/05/30 14:53:22 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/03 14:00:59 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,9 @@ void	check_size_line(t_map *map)
 }
 
 t_map	*ft_init_map(char *path, t_game *game)
-
+{
 	int	i;
+	int	fd;
 	t_map	*map;
 
 	map = malloc(sizeof(t_map));
