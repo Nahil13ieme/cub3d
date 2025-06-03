@@ -39,6 +39,7 @@ char	*ft_strjoinfree(char **s1, char *s2)
 	return (dest);
 }
 
+
 int	ft_tablen(char	**tab)
 {
 	int	i;
@@ -87,6 +88,7 @@ void	ft_print_tab(char **tab)
 	}
 }
 
+
 void	check_size_line(t_map *map)
 {
 	int		i;
@@ -112,10 +114,9 @@ void	check_size_line(t_map *map)
 }
 
 t_map	*ft_init_map(char *path, t_game *game)
-{
-	int		fd;
+
+	int	i;
 	t_map	*map;
-	int		i;
 
 	map = malloc(sizeof(t_map));
 	map->destroy = destroy_map;
@@ -131,6 +132,7 @@ t_map	*ft_init_map(char *path, t_game *game)
 	if (map->tiles == NULL)
 		return (printf("Error\nmap is not load"), NULL);
 	map->height = ft_tablen(map->tiles);
+	i = 0;
 	while (map->tiles[i])
 	{
 		if (map->width < ft_strlen(map->tiles[i]))
@@ -139,6 +141,9 @@ t_map	*ft_init_map(char *path, t_game *game)
 	}
 	check_size_line(map);
 	if (check_border(*map) == 1)
-		return (printf("Error\nMap Invalide\n"), NULL);
+	{
+		printf("Error\nMap Invalide\n");
+		return (NULL);
+	}
 	return (map);
 }

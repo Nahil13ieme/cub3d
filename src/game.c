@@ -12,6 +12,19 @@
 
 #include "../include/game.h"
 
+static t_game	*new_game2(t_game *game, int is_debugging)
+{
+	game->player = ft_init_player(game);
+	if (!game->player)
+		return (destroy_map(game->map), NULL);
+	game->render = new_render(game);
+	init_input(game);
+	if (is_debugging)
+		game->debug = new_debug(game);
+	game->destroy = destroy_game;
+	return (game);
+}
+
 t_game	*new_game(void *mlx, void *win, int is_debugging, char **av)
 {
 	t_game	*game;
@@ -24,6 +37,10 @@ t_game	*new_game(void *mlx, void *win, int is_debugging, char **av)
 		printf("Malloc error, what did you do ??");
 		exit(EXIT_FAILURE);
 	}
+	game->files[0] = "asset/wall_north.xpm";
+	game->files[1] = "asset/wall_south2.xpm";
+	game->files[2] = "asset/wall_north.xpm";
+	game->files[3] = "asset/wall_south2.xpm";
 	game->mlx = mlx;
 	game->win = win;
 	game->is_debugging = is_debugging;
@@ -32,15 +49,21 @@ t_game	*new_game(void *mlx, void *win, int is_debugging, char **av)
 	load_textures(game);
 	if (game->map == NULL)
 		return (NULL);
-	game->player = ft_init_player(game);
-	if (game->player == NULL)
-		return (destroy_map(game->map), NULL);
-	game->render = new_render(game);
-	init_input(game);
-	if (is_debugging)
-		game->debug = new_debug(game);
-	game->destroy = destroy_game;
-	return (game);
+	return (new_game2(game, is_debugging));
+}
+
+static void	input_lateral(t_game *g, t_vector2d *v)
+{
+	if (g->input.a)
+	{
+		v->x += g->player->dir.y * g->player->speed;
+		v->y -= g->player->dir.x * g->player->speed;
+	}
+	if (g->input.d)
+	{
+		v->x -= g->player->dir.y * g->player->speed;
+		v->y += g->player->dir.x * g->player->speed;
+	}
 }
 
 void	input(t_game *game)
@@ -49,9 +72,9 @@ void	input(t_game *game)
 
 	v = &game->player->velocity;
 	if (game->input.maj)
-		game->player->speed = 0.1f;
+		game->player->speed = 0.12f;
 	else
-		game->player->speed = 0.05f;
+		game->player->speed = 0.08f;
 	if (game->input.left)
 		game->player->dir = vector2d_rotate(game->player->dir, -0.1f);
 	if (game->input.right)
@@ -63,16 +86,7 @@ void	input(t_game *game)
 	if (game->input.s)
 		*v = vector2d_substract(*v, vector2d_scale(game->player->dir,
 					game->player->speed));
-	if (game->input.a)
-	{
-		v->x += game->player->dir.y * game->player->speed;
-		v->y -= game->player->dir.x * game->player->speed;
-	}
-	if (game->input.d)
-	{
-		v->x -= game->player->dir.y * game->player->speed;
-		v->y += game->player->dir.x * game->player->speed;
-	}
+	input_lateral(game, v);
 	if (vector2d_length(*v) > game->player->speed)
 		*v = vector2d_scale(vector2d_normalize(*v), game->player->speed);
 }
@@ -150,9 +164,18 @@ void	destroy_game(t_game *game)
 		game->map->destroy(game->map);
 	if (game->render)
 		game->render->destroy(game->render);
+	mlx_destroy_image(game->mlx, game->tex_man->wall_east->img_ptr);
+	mlx_destroy_image(game->mlx, game->tex_man->wall_north->img_ptr);
+	mlx_destroy_image(game->mlx, game->tex_man->wall_south->img_ptr);
+	mlx_destroy_image(game->mlx, game->tex_man->wall_west->img_ptr);
 	mlx_destroy_window(game->mlx, game->win);
 	mlx_destroy_display(game->mlx);
 	free(game->mlx);
+	free(game->tex_man->wall_east);
+	free(game->tex_man->wall_north);
+	free(game->tex_man->wall_south);
+	free(game->tex_man->wall_west);
+	free(game->tex_man);
 	free(game);
 	exit(EXIT_SUCCESS);
 }

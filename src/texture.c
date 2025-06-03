@@ -28,8 +28,8 @@ t_texture	*new_texture_from_file(void *mlx, char *file)
 		free(t);
 		return (NULL);
 	}
-	t->buffer = mlx_get_data_addr(t->img_ptr, &t->bpp, &t->line_len,
-			&t->endian);
+	t->buffer = mlx_get_data_addr(t->img_ptr, &t->bpp,
+			&t->line_len, &t->endian);
 	t->width = width;
 	t->height = height;
 	return (t);
@@ -43,8 +43,8 @@ t_texture	*new_texture(void *mlx, int width, int height)
 	if (!t)
 		return (NULL);
 	t->img_ptr = mlx_new_image(mlx, width, height);
-	t->buffer = mlx_get_data_addr(t->img_ptr, &t->bpp, &t->line_len,
-			&t->endian);
+	t->buffer = mlx_get_data_addr(t->img_ptr, &t->bpp,
+			&t->line_len, &t->endian);
 	t->width = width;
 	t->height = height;
 	return (t);

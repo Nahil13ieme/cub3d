@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:09:00 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/27 14:03:34 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/03 06:52:29 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ t_debug	*new_debug(t_game *game)
 	debug->mlx = game->mlx;
 	debug->win = mlx_new_window(debug->mlx, (game->map->width + 1) * 32,
 			(game->map->height + 1) * 32, "debug_window");
+	debug->win = mlx_new_window(debug->mlx, (game->map->width + 1) * 32,
+			(game->map->height + 1) * 32, "debug_window");
 	debug->game = game;
 	debug->destroy = destroy_debug;
 	mlx_hook(debug->win, 2, 1L << 0, debug_keyhook, debug);
@@ -49,6 +51,7 @@ void	destroy_debug(t_debug **debug)
 {
 	if (!(*debug))
 		return ;
+	(*debug)->game->is_debugging = 0;
 	(*debug)->game->is_debugging = 0;
 	mlx_destroy_window((*debug)->mlx, (*debug)->win);
 	(*debug)->win = NULL;

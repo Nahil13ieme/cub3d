@@ -22,3 +22,4 @@ void	init_input(t_game *game)
 	game->input.right = false;
 	game->input.maj = false;
 }
+

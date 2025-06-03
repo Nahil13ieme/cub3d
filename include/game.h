@@ -47,6 +47,7 @@ typedef struct s_game
 	void				*mlx;
 	void				*win;
 	int					is_debugging;
+	char				*files[4];
 	t_map				*map;
 	t_texture_manager	*tex_man;
 	t_debug				*debug;

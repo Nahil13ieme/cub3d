@@ -15,29 +15,8 @@
 t_map	*new_map(void)
 {
 	t_map	*map;
-	int		i;
-	int		j;
 
 	map = malloc(sizeof(t_map));
-	map->tiles = malloc(sizeof(char *) * 5);
-	if (!map->tiles)
-		return (NULL);
-	i = 0;
-	while (i < 5)
-	{
-		map->tiles[i] = malloc(sizeof(char) * 5);
-		j = -1;
-		while (++j < 5)
-		{
-			if (i == 0 || j == 0 || i == 4 || j == 4)
-				map->tiles[i][j] = '1';
-			else if (i == 3 && j == 3)
-				map->tiles[i][j] = 'P';
-			else
-				map->tiles[i][j] = '0';
-		}
-		i++;
-	}
 	return (map);
 }
 
