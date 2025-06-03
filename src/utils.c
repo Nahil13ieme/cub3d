@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.h                                              :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/16 18:16:35 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/29 13:05:09 by tle-saut         ###   ########.fr       */
+/*   Created: 2025/05/30 14:24:00 by tle-saut          #+#    #+#             */
+/*   Updated: 2025/05/30 14:25:29 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_H
-# define MAP_H
+#include "../include/cub3d.h"
 
-# include "cub3d.h"
-
-typedef struct s_map
+void	free_tab(char **tab)
 {
-	int			width;
-	int			height;
-	char		dir;
-	char		**tiles;
-	char		**tab;
-	t_vector2d	start;
-	void		(*destroy)(struct s_map *map);
-	//objects if any
-}	t_map;
+	int	i;
 
-void	destroy_map(t_map *map);
-t_map	*new_map();
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+}
 
-#endif /* MAP_H */

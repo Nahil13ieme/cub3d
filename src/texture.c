@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 17:01:17 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/06/03 06:52:49 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/05/30 15:04:49 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,14 @@ t_texture	*new_texture(void *mlx, int width, int height)
 	return (t);
 }
 
-t_texture_manager	*load_textures(t_game *game)
+void	load_textures(t_game *game)
 {
-	t_texture_manager	*tex_man;
-
-	tex_man = malloc(sizeof(t_texture_manager));
-	if (!tex_man)
-		return (NULL);
-	tex_man->wall_north = new_texture_from_file(game->mlx, game->files[0]);
-	tex_man->wall_south = new_texture_from_file(game->mlx, game->files[1]);
-	tex_man->wall_east = new_texture_from_file(game->mlx, game->files[2]);
-	tex_man->wall_west = new_texture_from_file(game->mlx, game->files[3]);
-	return (tex_man);
+	game->tex_man->wall_north = new_texture_from_file(game->mlx,
+			game->pathn);
+	game->tex_man->wall_south = new_texture_from_file(game->mlx,
+			game->paths);
+	game->tex_man->wall_east = new_texture_from_file(game->mlx,
+			game->pathe);
+	game->tex_man->wall_west = new_texture_from_file(game->mlx,
+			game->pathw);
 }
