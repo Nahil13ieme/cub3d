@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:15:26 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/06/03 06:37:28 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/06/03 06:57:16 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,20 @@ t_map	*new_map(void)
 
 void	destroy_map(t_map *map)
 {
-	free(map->tiles);
+	int	i;
+
+	if (!map)
+		return ;
+	if (map->tiles)
+	{
+		i = 0;
+		while (map->tiles[i])
+		{
+			free(map->tiles[i]);
+			i++;
+		}
+		free(map->tiles);
+	}
 	free(map);
 }
 

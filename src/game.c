@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:20:51 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/06/03 06:54:23 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/06/03 07:03:07 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,9 +164,18 @@ void	destroy_game(t_game *game)
 		game->map->destroy(game->map);
 	if (game->render)
 		game->render->destroy(game->render);
+	mlx_destroy_image(game->mlx, game->tex_man->wall_east->img_ptr);
+	mlx_destroy_image(game->mlx, game->tex_man->wall_north->img_ptr);
+	mlx_destroy_image(game->mlx, game->tex_man->wall_south->img_ptr);
+	mlx_destroy_image(game->mlx, game->tex_man->wall_west->img_ptr);
 	mlx_destroy_window(game->mlx, game->win);
 	mlx_destroy_display(game->mlx);
 	free(game->mlx);
+	free(game->tex_man->wall_east);
+	free(game->tex_man->wall_north);
+	free(game->tex_man->wall_south);
+	free(game->tex_man->wall_west);
+	free(game->tex_man);
 	free(game);
 	exit(EXIT_SUCCESS);
 }
