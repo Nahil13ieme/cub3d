@@ -6,16 +6,18 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 14:28:03 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/03 06:26:56 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/06/03 06:52:25 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 #include <math.h>
+#include <math.h>
 
 void	set_player_box(t_player *player)
 {
 	player->box.pos = vector2d(player->pos.x, player->pos.y);
+	player->box.size = vector2d(SIZE, SIZE);
 	player->box.size = vector2d(SIZE, SIZE);
 }
 

@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:16:01 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/06/03 06:50:03 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/06/03 06:52:46 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,7 @@ void	clear_buffer(t_texture *t)
 	int	x;
 	int	y;
 	int	i;
+	int	i;
 
 	y = 0;
 	while (y < t->height)
@@ -218,10 +219,13 @@ void	draw_debug_buffer(t_game *game)
 }
 
 int	render_loop(t_game *game)
+int	render_loop(t_game *game)
 {
 	mlx_clear_window(game->mlx, game->win);
 	clear_buffer(game->render->main_buffer);
 	draw_buffer(game);
+	mlx_put_image_to_window(game->mlx, game->win,
+		game->render->main_buffer->img_ptr, 0, 0);
 	mlx_put_image_to_window(game->mlx, game->win,
 		game->render->main_buffer->img_ptr, 0, 0);
 	if (game->is_debugging)
@@ -229,6 +233,8 @@ int	render_loop(t_game *game)
 		mlx_clear_window(game->mlx, game->debug->win);
 		clear_buffer(game->render->debug_buffer);
 		draw_debug_buffer(game);
+		mlx_put_image_to_window(game->mlx, game->debug->win,
+			game->render->debug_buffer->img_ptr, 0, 0);
 		mlx_put_image_to_window(game->mlx, game->debug->win,
 			game->render->debug_buffer->img_ptr, 0, 0);
 	}
@@ -243,3 +249,4 @@ void	destroy_render(t_render *render)
 	free(render->main_buffer);
 	free(render);
 }
+

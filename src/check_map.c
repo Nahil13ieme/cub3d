@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 12:56:34 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/03 06:34:57 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/06/03 06:52:19 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ char	*ft_strjoinfree(char **s1, char *s2)
 		free(*s1);
 	return (dest);
 }
+
 
 int	ft_tablen(char	**tab)
 {
@@ -78,6 +79,7 @@ char	**ft_init_tab(int fd)
 void	ft_print_tab(char **tab)
 {
 	int	i;
+	int	i;
 
 	i = 0;
 	while (tab[i])
@@ -86,6 +88,7 @@ void	ft_print_tab(char **tab)
 		i++;
 	}
 }
+
 
 void	check_size_line(t_map *map)
 {
@@ -114,6 +117,7 @@ static t_map	*init_map2(t_map *map)
 	while (map->tiles[i])
 	{
 		if (map->width < ft_strlen(map->tiles[i]))
+			map->width = ft_strlen(map->tiles[i]);
 			map->width = ft_strlen(map->tiles[i]);
 		i++;
 	}
