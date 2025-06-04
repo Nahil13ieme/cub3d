@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:09:00 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/06/03 06:52:29 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/06/04 11:52:03 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ t_debug	*new_debug(t_game *game)
 		exit(EXIT_FAILURE);
 	}
 	debug->mlx = game->mlx;
-	debug->win = mlx_new_window(debug->mlx, (game->map->width + 1) * 32,
-			(game->map->height + 1) * 32, "debug_window");
 	debug->win = mlx_new_window(debug->mlx, (game->map->width + 1) * 32,
 			(game->map->height + 1) * 32, "debug_window");
 	debug->game = game;
