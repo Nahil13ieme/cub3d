@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:20:51 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/30 15:08:18 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/04 11:48:50 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ t_game	*new_game(void *mlx, void *win, int is_debugging, char **av)
 	game->is_debugging = is_debugging;
 	game->game_state = RUNNING;
 	game->map = ft_init_map(av[1], game);
+	if (game->map == NULL)
+		return (NULL);
 	load_textures(game);
 	if (game->map == NULL)
 		return (NULL);
