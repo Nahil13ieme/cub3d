@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
+/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:20:51 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/06/04 11:48:50 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/04 12:10:31 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,8 @@ void	destroy_game(t_game *game)
 	free(game->tex_man->wall_north);
 	free(game->tex_man->wall_south);
 	free(game->tex_man->wall_west);
+	free(game->tex_man->cell);
+	free(game->tex_man->floor);
 	free(game->tex_man);
 	free(game);
 	exit(EXIT_SUCCESS);

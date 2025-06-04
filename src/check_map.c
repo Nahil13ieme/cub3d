@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
+/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 12:56:34 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/03 14:00:59 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/04 12:07:09 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,12 +102,10 @@ void	check_size_line(t_map *map)
 		while ((int)ft_strlen(map->tiles[i]) < map->width && map->tiles[i])
 		{
 			tmp = ft_strjoin(map->tiles[i], " ");
+			if (tmp == NULL)
+				return;
 			free(map->tiles[i]);
 			map->tiles[i] = tmp;
-			if (i > 0)
-				i--;
-			else
-				i = 0;
 		}
 		i++;
 	}
