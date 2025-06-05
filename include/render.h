@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 15:42:03 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/06/03 06:49:45 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:33:45 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,5 @@ t_render	*new_render(t_game	*game);
 void		draw_buffer(t_game *game);
 int			render_loop(t_game *game);
 void		destroy_render(t_render *render);
-void	draw_walls(t_game *game);
+void		draw_walls(t_game *game);
 #endif /* RENDER_H */

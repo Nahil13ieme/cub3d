@@ -5,13 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/05 13:52:21 by tle-saut         ###   ########.fr       */
+/*   Created: 2025/06/05 14:30:54 by tle-saut          #+#    #+#             */
+/*   Updated: 2025/06/05 14:32:11 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
-
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -44,23 +41,21 @@ void		init_input(t_game *game);
 int			check_border(t_map map);
 int			ft_tablen(char	**tab);
 
-void	ft_free_map(char **all);
+void		ft_free_map(char **all);
 
-int		check_collisions(t_bbox player, int rows, int cols);
-void	set_player_box(t_player *player);
+int			check_collisions(t_bbox player, int rows, int cols);
+void		set_player_box(t_player *player);
 
+int			check_cub(t_game *game, t_map *map);
 
-int	check_cub(t_game *game, t_map *map);
-
-
-void	free_tab(char **tab);
+void		free_tab(char **tab);
 
 # define TRUE 1
 # define FALSE 0
 
 # define SIZE 64
 
-# define BUFFER_SIZE sizeof(char *)
+# define BUFFER_SIZE 256
 
 # ifndef DEBUG
 #  define DEBUG 0

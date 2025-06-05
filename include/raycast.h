@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 15:24:55 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/24 04:46:49 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:33:33 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,9 @@ typedef struct s_ray_data
 }	t_ray_data;
 
 void		draw_pixel(t_texture *t, int x, int y, int color);
-void		draw_line(t_texture *t, t_vector2d start, t_vector2d end, int color);
-t_vector2d	raycast_to_wall(t_game *game, t_vector2d origin, t_vector2d dir, int *side_hit);
+void		draw_line(t_texture *t, t_vector2d start, t_vector2d end,
+				int color);
+t_vector2d	raycast_to_wall(t_game *game, t_vector2d origin,
+				t_vector2d dir, int *side_hit);
 
 #endif // RAYCAST_H

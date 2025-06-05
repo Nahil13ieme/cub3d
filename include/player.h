@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:10:34 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/24 03:52:12 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:32:54 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ typedef struct s_bbox
 	t_vector2d	size;
 }	t_bbox;
 
-
 typedef struct s_player
 {
 	float		hp;
@@ -44,11 +43,8 @@ typedef struct s_player
 	void		(*destroy)(struct s_player *player);
 }	t_player;
 
-
-
 t_player	*ft_init_player(t_game *game);
 void		move_player(t_game	*game);
 void		destroy_player(t_player *player);
-
 
 #endif /* PLAYER_H */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:16:35 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/06/04 12:20:11 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:34:06 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,5 @@ typedef struct s_map
 }	t_map;
 
 void	destroy_map(t_map *map);
-t_map	*new_map();
 
 #endif /* MAP_H */

@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 17:10:44 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/05/29 14:18:29 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:32:38 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_input
 	bool	right;
 	bool	maj;
 }	t_input;
- 
+
 typedef enum e_game_state
 {
 	NONE,
