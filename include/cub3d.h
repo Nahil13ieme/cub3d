@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/05/30 14:25:44 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/05 13:52:21 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include <functions.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>

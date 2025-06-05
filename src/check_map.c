@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 12:56:34 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/05 13:21:06 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/05 13:34:29 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,6 @@ char	*ft_strjoinfree(char **s1, char *s2)
 	if (*s1 != NULL)
 		free(*s1);
 	return (dest);
-}
-
-
-int	ft_tablen(char	**tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-		i++;
-	return (i - 1);
 }
 
 char	**ft_init_tab(int fd)
@@ -88,12 +77,11 @@ void	ft_print_tab(char **tab)
 	}
 }
 
-
 void	check_size_line(t_map *map)
 {
 	int		i;
 	char	*tmp;
-	
+
 	i = 0;
 	while (i < map->height + 1)
 	{
@@ -103,7 +91,7 @@ void	check_size_line(t_map *map)
 		{
 			tmp = ft_strjoin(map->tiles[i], " ");
 			if (tmp == NULL)
-				return;
+				return ;
 			free(map->tiles[i]);
 			map->tiles[i] = tmp;
 		}
@@ -111,11 +99,10 @@ void	check_size_line(t_map *map)
 	}
 }
 
-
 t_map	*ft_init_map(char *path, t_game *game)
 {
-	int	i;
-	int	fd;
+	int		i;
+	int		fd;
 	t_map	*map;
 
 	map = malloc(sizeof(t_map));

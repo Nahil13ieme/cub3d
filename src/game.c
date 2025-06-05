@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:20:51 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/06/05 13:25:29 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/05 13:44:12 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,89 +101,4 @@ int	game_loop(t_game *game)
 	cap_fps();
 	game->render->render_loop(game);
 	return (1);
-}
-
-void	cap_fps(void)
-{
-	static clock_t	g_last_frame_time = 0;
-	clock_t			current;
-	clock_t			frame;
-
-	current = clock();
-	frame = (current - g_last_frame_time) * 1000 / CLOCKS_PER_SEC;
-	if (frame < FRAME_TIME_MS)
-		usleep((FRAME_TIME_MS - frame) * 1000);
-	g_last_frame_time = clock();
-}
-
-int	handle_key_release(int keycode, t_game *game)
-{
-	if (keycode == KEY_W)
-		game->input.w = false;
-	if (keycode == KEY_S)
-		game->input.s = false;
-	if (keycode == KEY_A)
-		game->input.a = false;
-	if (keycode == KEY_D)
-		game->input.d = false;
-	if (keycode == KEY_LEFT)
-		game->input.left = false;
-	if (keycode == KEY_RIGHT)
-		game->input.right = false;
-	if (keycode == KEY_MAJ)
-		game->input.maj = false;
-	return (0);
-}
-
-int	key_hook(int keycode, t_game *game)
-{
-	if (keycode == 65307)
-		game->destroy(game);
-	if (keycode == KEY_W)
-		game->input.w = true;
-	if (keycode == KEY_S)
-		game->input.s = true;
-	if (keycode == KEY_A)
-		game->input.a = true;
-	if (keycode == KEY_D)
-		game->input.d = true;
-	if (keycode == KEY_LEFT)
-		game->input.left = true;
-	if (keycode == KEY_RIGHT)
-		game->input.right = true;
-	if (keycode == KEY_MAJ)
-		game->input.maj = true;
-	return (0);
-}
-
-void	destroy_game(t_game *game)
-{
-	if (game->is_debugging && game->debug)
-		game->debug->destroy(&game->debug);
-	if (game->player)
-		game->player->destroy(game->player);
-	if (game->map)
-		game->map->destroy(game->map);
-	if (game->render)
-		game->render->destroy(game->render);
-	mlx_destroy_image(game->mlx, game->tex_man->wall_east->img_ptr);
-	mlx_destroy_image(game->mlx, game->tex_man->wall_north->img_ptr);
-	mlx_destroy_image(game->mlx, game->tex_man->wall_south->img_ptr);
-	mlx_destroy_image(game->mlx, game->tex_man->wall_west->img_ptr);
-	mlx_destroy_window(game->mlx, game->win);
-	mlx_destroy_display(game->mlx);
-	free(game->mlx);
-	free(game->pathe);
-	free(game->paths);
-	free(game->pathn);
-	free(game->pathw);
-	free(game->tex_man->wall_east);
-	free(game->tex_man->wall_north);
-	free(game->tex_man->wall_south);
-	free(game->tex_man->wall_west);
-	free(game->tex_man->cell);
-	free(game->tex_man->floor);
-	free(game->tex_man);
-	free(game);
-	exit(EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:15:26 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/06/05 13:23:45 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/05 13:30:15 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ t_map	*new_map(void)
 
 void	destroy_map(t_map *map)
 {
+	int	i;
+
 	if (!map)
-		return;
+		return ;
 	if (map->tiles)
 	{
-		int	i;
-
 		i = 0;
 		while (i < map->height + 1)
 		{

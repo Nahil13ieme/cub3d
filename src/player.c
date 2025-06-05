@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:15:02 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/06/03 06:52:43 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/06/05 13:31:17 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,12 +100,4 @@ void	move_player(t_game *game)
 	new_pos.y = game->player->pos.y + game->player->velocity.y * 0.5;
 	if (is_walkable_y(game, new_pos, box))
 		game->player->pos.y = new_pos.y;
-}
-
-void	destroy_player(t_player *player)
-{
-	t_player	*fplayer;
-
-	fplayer = (t_player *)player;
-	free(fplayer);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_border.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 15:03:53 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/03 06:52:10 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/06/05 13:44:38 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	check_horizon(char *str)
 {
 	int	i;
 	int	j;
-
 
 	i = 0;
 	j = ft_strlen(str) - 1;

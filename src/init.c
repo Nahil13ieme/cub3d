@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:13:49 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/05/30 14:33:51 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/05 13:30:25 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,3 @@ void	init_input(t_game *game)
 	game->input.right = false;
 	game->input.maj = false;
 }
-
