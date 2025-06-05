@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:30:57 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/05 13:45:43 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:38:58 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,17 @@ void	destroy_player(t_player *player)
 
 	fplayer = (t_player *)player;
 	free(fplayer);
+}
+
+void	free_tex_man(t_game *game)
+{
+	free(game->tex_man->wall_east);
+	free(game->tex_man->wall_north);
+	free(game->tex_man->wall_south);
+	free(game->tex_man->wall_west);
+	free(game->tex_man->cell);
+	free(game->tex_man->floor);
+	free(game->tex_man);
 }
 
 void	destroy_game(t_game *game)
@@ -41,13 +52,7 @@ void	destroy_game(t_game *game)
 	free(game->paths);
 	free(game->pathn);
 	free(game->pathw);
-	free(game->tex_man->wall_east);
-	free(game->tex_man->wall_north);
-	free(game->tex_man->wall_south);
-	free(game->tex_man->wall_west);
-	free(game->tex_man->cell);
-	free(game->tex_man->floor);
-	free(game->tex_man);
+	free_tex_man(game);
 	free(game);
 	exit(EXIT_SUCCESS);
 }
