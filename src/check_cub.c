@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 13:03:52 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/05/30 15:21:58 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/05 13:23:08 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	copy_map(t_map *map, char **tab, int i)
 	map->tiles = malloc(sizeof(char **) * (l - i + 1));
 	while (tab[i])
 	{
-		map->tiles[k] = tab[i];
+		map->tiles[k] = ft_strdup(tab[i]);
 		k++;
 		i++;
 	}
@@ -37,7 +37,7 @@ void	set_texture(char **text, char *str)
 	while (*str && *str != ' ')
 		str++;
 	str++;
-	*text = str;
+	*text = ft_strdup(str);
 }
 
 int	init_tex_man(t_game *game)

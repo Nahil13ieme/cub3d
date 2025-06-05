@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 12:56:34 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/04 12:07:09 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/06/05 13:21:06 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ void	check_size_line(t_map *map)
 	}
 }
 
+
 t_map	*ft_init_map(char *path, t_game *game)
 {
 	int	i;
@@ -118,6 +119,7 @@ t_map	*ft_init_map(char *path, t_game *game)
 	t_map	*map;
 
 	map = malloc(sizeof(t_map));
+	ft_memset(map, 0, sizeof(t_map));
 	map->destroy = destroy_map;
 	i = 0;
 	map->width = 0;
@@ -144,5 +146,6 @@ t_map	*ft_init_map(char *path, t_game *game)
 		printf("Error\nMap Invalide\n");
 		return (NULL);
 	}
+	free_tab(map->tab);
 	return (map);
 }
