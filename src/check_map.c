@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 12:56:34 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/05 13:34:29 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:44:49 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,14 +101,12 @@ void	check_size_line(t_map *map)
 
 t_map	*ft_init_map(char *path, t_game *game)
 {
-	int		i;
 	int		fd;
 	t_map	*map;
 
 	map = malloc(sizeof(t_map));
 	ft_memset(map, 0, sizeof(t_map));
 	map->destroy = destroy_map;
-	i = 0;
 	map->width = 0;
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
@@ -119,14 +117,7 @@ t_map	*ft_init_map(char *path, t_game *game)
 		return (printf("Error\nmap is not load"), NULL);
 	if (map->tiles == NULL)
 		return (printf("Error\nmap is not load"), NULL);
-	map->height = ft_tablen(map->tiles);
-	i = 0;
-	while (map->tiles[i])
-	{
-		if (map->width < ft_strlen(map->tiles[i]))
-			map->width = ft_strlen(map->tiles[i]);
-		i++;
-	}
+	set_size_map(map);
 	check_size_line(map);
 	if (check_border(*map) == 1)
 	{

@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:51:21 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/05 14:30:32 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:44:37 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,5 +154,6 @@ void		load_textures(t_game *game);
 /****************************************UTILS********************************/
 void		free_tab(char **tab);
 int			ft_tablen(char	**tab);
+void		set_size_map(t_map *map);
 
 #endif
