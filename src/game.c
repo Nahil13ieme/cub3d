@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:20:51 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/06/05 13:44:12 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/09 16:18:46 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,6 @@ t_game	*new_game(void *mlx, void *win, int is_debugging, char **av)
 		printf("Malloc error, what did you do ??");
 		exit(EXIT_FAILURE);
 	}
-	game->files[0] = "asset/wall_north.xpm";
-	game->files[1] = "asset/wall_south2.xpm";
-	game->files[2] = "asset/wall_north.xpm";
-	game->files[3] = "asset/wall_south2.xpm";
 	game->mlx = mlx;
 	game->win = win;
 	game->is_debugging = is_debugging;
@@ -48,7 +44,6 @@ t_game	*new_game(void *mlx, void *win, int is_debugging, char **av)
 	game->map = ft_init_map(av[1], game);
 	if (game->map == NULL)
 		return (NULL);
-	load_textures(game);
 	if (game->map == NULL)
 		return (NULL);
 	return (new_game2(game, is_debugging));

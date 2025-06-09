@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 14:24:00 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/05 14:44:23 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/09 16:13:42 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,15 @@ void	set_size_map(t_map *map)
 			map->width = ft_strlen(map->tiles[i]);
 		i++;
 	}
+}
+
+int	check_error_parsing(t_game *game)
+{
+	if (game->tex_man->wall_east == NULL || game->tex_man->wall_east == NULL
+		|| game->tex_man->wall_east == NULL
+		|| game->tex_man->wall_east == NULL)
+		{
+			return (1);
+		}
+	return (0);
 }
