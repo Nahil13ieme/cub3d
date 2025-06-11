@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:30:57 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/05 14:38:58 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/11 23:54:22 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,26 @@ void	destroy_render(t_render *render)
 	free(render->debug_buffer);
 	free(render->main_buffer);
 	free(render);
+}
+
+void	destroy_game_before(t_game *game)
+{
+	if (game->is_debugging && game->debug)
+		game->debug->destroy(&game->debug);
+	if (game->map)
+		game->map->destroy(game->map);
+	mlx_destroy_image(game->mlx, game->tex_man->wall_east->img_ptr);
+	mlx_destroy_image(game->mlx, game->tex_man->wall_north->img_ptr);
+	mlx_destroy_image(game->mlx, game->tex_man->wall_south->img_ptr);
+	mlx_destroy_image(game->mlx, game->tex_man->wall_west->img_ptr);
+	mlx_destroy_window(game->mlx, game->win);
+	mlx_destroy_display(game->mlx);
+	free(game->mlx);
+	free(game->pathe);
+	free(game->paths);
+	free(game->pathn);
+	free(game->pathw);
+	free_tex_man(game);
+	free(game);
+	exit(EXIT_SUCCESS);
 }

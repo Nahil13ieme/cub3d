@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:51:21 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/11 23:31:31 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/11 23:55:24 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void		destroy_debug(t_debug **debug);
 void		destroy_render(t_render *render);
 void		destroy_game(t_game *game);
 void		destroy_player(t_player *player);
+void		destroy_game_before(t_game *game);
 
 /****************************************DRAW*********************************/
 void		draw_pixel(t_texture *t, int x, int y, int color);
