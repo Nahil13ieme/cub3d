@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 14:24:00 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/11 23:22:54 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/11 23:31:12 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,10 @@ int	check_char(char c)
 	else
 		return (1);
 }
-int	check_search(char **map, int lock)
+int	check_search(char **map, int lock, int i)
 {
-	int	i;
 	int	j;
 
-	i = 0;
 	while (map[i])
 	{
 		j = 0;
@@ -92,11 +90,14 @@ int	check_search(char **map, int lock)
 			while (map[i][j] == ' ')
 				j++;
 			if (check_char(map[i][j]) && map[i][j])
-				return (printf("Error\nCharacter not alowed %c\n", map[i][j]), 1);
-			if ((map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' || map[i][j] == 'E') && lock == 0  && map[i][j])
+				return (printf("Error\nCharacter not alowed in map : '%c'\n",
+						 map[i][j]), 1);
+			if ((map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W'
+				|| map[i][j] == 'E') && lock == 0  && map[i][j])
 				lock = 1;
-			else if ((map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' || map[i][j] == 'E') && lock == 1  && map[i][j])
-				return (printf("Too many spawn point\n"), 1);
+			else if ((map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W'
+				|| map[i][j] == 'E') && lock == 1  && map[i][j])
+				return (printf("Error\nToo many spawn point\n"), 1);
 			if (map[i][j])
 				j++;
 		}

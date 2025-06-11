@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 12:56:34 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/11 16:47:01 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/11 23:48:54 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ t_map	*ft_init_map(char *path, t_game *game)
 	set_size_map(map);
 	check_size_line(map);
 	if (check_border(*map) == 1)
-		return (printf("Error\nMap Invalide\n"), NULL);
+		return (printf("Error\nMap Invalide\n"), free_tab(map->tab), map->destroy(map), NULL);
 	free_tab(map->tab);
 	return (map);
 }

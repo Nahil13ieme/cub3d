@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 15:43:10 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/06/11 22:43:38 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/11 23:31:39 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int	main(int ac, char **av)
 	game = new_game(mlx, win, DEBUG, av);
 	if (!game)
 		return (1);
-	if (check_search(game->map->tiles, 0) == 1)
-		return (printf("Error\nmap is not load"), 1);
+	if (check_search(game->map->tiles, 0, 0) == 1)
+		return (game->destroy(game), 1);
 	mlx_loop_hook(game->mlx, game_loop, game);
 	mlx_hook(game->win, 2, 1L << 0, key_hook, game);
 	mlx_hook(game->win, 3, 1L << 1, handle_key_release, game);
