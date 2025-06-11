@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:51:21 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/11 23:55:24 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/11 23:59:25 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,5 @@ int			ft_tablen(char	**tab);
 void		set_size_map(t_map *map);
 int			check_error_parsing(t_game *game);
 int			check_search(char **map, int lock, int i);
-
-
 
 #endif

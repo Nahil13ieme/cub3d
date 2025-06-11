@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 13:03:52 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/09 16:17:41 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/12 00:01:09 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,3 @@ int	check_cub(t_game *game, t_map *map)
 	game->tex_man->cell = ft_substr(map->tab[5], 2, ft_strlen(map->tab[5]));
 	return (0);
 }
-
-
