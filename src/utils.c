@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 14:24:00 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/09 16:13:42 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/11 16:52:21 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,29 @@ int	check_error_parsing(t_game *game)
 		|| game->tex_man->wall_east == NULL)
 		{
 			return (1);
+		}
+	return (0);
+}
+
+int	flood_fill(int x, int y, char **map, int lock)
+{
+	if ((x < 1 || x > ft_strlen(map[0])) && (y < 1 || y > ft_tablen(map)))
+		return (0);
+	if ((map[y][x] == 'N' || map[y][x] == 'E' || map[y][x] == 'S'
+		|| map[y][x] == 'W') && lock == 1)
+			return (printf("Error\nToo many spawn point\n"), 1);
+	else if ((map[y][x] == 'N' || map[y][x] == 'E' || map[y][x] == 'S'
+		|| map[y][x] == 'W') && lock == 0)
+			lock = 1;
+	else if (map[y][x] != 1 && map[y][x] != 0)
+		return (1);
+	else if (map[y][x] == 1 && map[y][x] == 0)
+		{
+			if (flood_fill(x + 1, y, map, lock) == 1
+				&& flood_fill(x - 1, y, map, lock) == 1
+				&& flood_fill(x, y + 1, map, lock) == 1
+				&& flood_fill(x, y - 1 , map, lock) == 1)
+					return (printf("Error\nCharacter not alowed in map\n"), 1);
 		}
 	return (0);
 }

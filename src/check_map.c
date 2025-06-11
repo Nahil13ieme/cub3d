@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 12:56:34 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/05 14:44:49 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/11 16:47:01 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,15 +115,12 @@ t_map	*ft_init_map(char *path, t_game *game)
 	close(fd);
 	if (check_cub(game, map) == 1)
 		return (printf("Error\nmap is not load"), NULL);
-	if (map->tiles == NULL)
+	if (!(map->tiles))
 		return (printf("Error\nmap is not load"), NULL);
 	set_size_map(map);
 	check_size_line(map);
 	if (check_border(*map) == 1)
-	{
-		printf("Error\nMap Invalide\n");
-		return (NULL);
-	}
+		return (printf("Error\nMap Invalide\n"), NULL);
 	free_tab(map->tab);
 	return (map);
 }
