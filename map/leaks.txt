@@ -1,0 +1,4 @@
+fuite de memoire quna on ecrit "  F" dans le .cub
+si on met un espace avant chaque path sa leak ausi
+
+la fenetre ne se ferme pas quand on clique sur la croix
