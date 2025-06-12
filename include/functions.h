@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:51:21 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/11 23:59:25 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/12 14:51:05 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,11 @@ void		destroy_debug(t_debug **debug);
 void		destroy_render(t_render *render);
 void		destroy_game(t_game *game);
 void		destroy_player(t_player *player);
-void		destroy_game_before(t_game *game);
+void		destroy_game_before(t_game *game, int sel);
+void		free_texture_before(t_texture_manager *text);
+void		free_tex_man(t_game *game);
+void		destroy_img(t_game *game, int sel);
+
 
 /****************************************DRAW*********************************/
 void		draw_pixel(t_texture *t, int x, int y, int color);
@@ -158,5 +162,8 @@ int			ft_tablen(char	**tab);
 void		set_size_map(t_map *map);
 int			check_error_parsing(t_game *game);
 int			check_search(char **map, int lock, int i);
+
+/****************************************UTILS_2******************************/
+char	**ft_split_space(const char *s, char c);
 
 #endif

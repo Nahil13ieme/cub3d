@@ -6,7 +6,7 @@
 #    By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/12 00:03:21 by tle-saut          #+#    #+#              #
-#    Updated: 2025/06/12 00:03:24 by tle-saut         ###   ########.fr        #
+#    Updated: 2025/06/12 11:51:28 by tle-saut         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SRC         = cub3d.c check_file.c game.c debug.c draw.c debug_utils.c \
 			  render.c map.c player.c texture.c raycasting.c\
 			  init.c check_map.c check_border.c collision.c check_cub.c\
 			  utils.c destroy.c draw2.c game2.c raycasting2.c\
-			  raycasting3.c render2.c utils2.c
+			  raycasting3.c render2.c utils2.c split.c
 
 VECTOR      = vector2d.c vector2d_math.c
 

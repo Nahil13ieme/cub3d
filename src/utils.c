@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 14:24:00 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/12 00:00:55 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/12 14:23:30 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,13 @@ void	free_tab(char **tab)
 	i = 0;
 	while (tab[i])
 	{
-		free(tab[i]);
-		i++;
+		if (!(tab[i]))
+			i++;
+		else
+		{
+			free(tab[i]);
+			i++;
+		}
 	}
 	free(tab);
 }

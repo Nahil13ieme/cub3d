@@ -6,17 +6,17 @@
 /*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 12:56:34 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/12 00:02:40 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/12 15:08:06 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-char	*ft_strjoinfree(char **s1, char *s2)
+char *ft_strjoinfree(char **s1, char *s2)
 {
-	size_t	i;
-	size_t	j;
-	char	*dest;
+	size_t i;
+	size_t j;
+	char *dest;
 
 	i = 0;
 	j = 0;
@@ -39,12 +39,12 @@ char	*ft_strjoinfree(char **s1, char *s2)
 	return (dest);
 }
 
-char	**ft_init_tab(int fd)
+char **ft_init_tab(int fd)
 {
-	int		a;
-	char	buffer[BUFFER_SIZE + 1];
-	char	**tab;
-	char	*line;
+	int a;
+	char buffer[BUFFER_SIZE + 1];
+	char **tab;
+	char *line;
 
 	line = NULL;
 	tab = NULL;
@@ -53,21 +53,21 @@ char	**ft_init_tab(int fd)
 	{
 		a = read(fd, buffer, BUFFER_SIZE);
 		if (a < 1)
-			break ;
+			break;
 		buffer[a] = '\0';
 		if (line == NULL)
 			line = ft_strdup(buffer);
 		else
 			line = ft_strjoinfree(&line, buffer);
 	}
-	tab = ft_split(line, '\n');
+	tab = ft_split_space(line, '\n');
 	free(line);
 	return (tab);
 }
 
-void	ft_print_tab(char **tab)
+void ft_print_tab(char **tab)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (tab[i])
@@ -77,10 +77,10 @@ void	ft_print_tab(char **tab)
 	}
 }
 
-void	check_size_line(t_map *map)
+void check_size_line(t_map *map)
 {
-	int		i;
-	char	*tmp;
+	int i;
+	char *tmp;
 
 	i = 0;
 	while (i < map->height + 1)
@@ -91,7 +91,7 @@ void	check_size_line(t_map *map)
 		{
 			tmp = ft_strjoin(map->tiles[i], " ");
 			if (tmp == NULL)
-				return ;
+				return;
 			free(map->tiles[i]);
 			map->tiles[i] = tmp;
 		}
@@ -99,10 +99,10 @@ void	check_size_line(t_map *map)
 	}
 }
 
-t_map	*ft_init_map(char *path, t_game *game)
+t_map *ft_init_map(char *path, t_game *game)
 {
-	int		fd;
-	t_map	*map;
+	int fd;
+	t_map *map;
 
 	map = malloc(sizeof(t_map));
 	ft_memset(map, 0, sizeof(t_map));
@@ -114,14 +114,13 @@ t_map	*ft_init_map(char *path, t_game *game)
 	map->tab = ft_init_tab(fd);
 	close(fd);
 	if (check_cub(game, map) == 1)
-		return (printf("Error\nmap is not load"), NULL);
+		return (printf("Error\nmap is not load\n"), free_tab(map->tab), free(map), NULL);
 	if (!(map->tiles))
-		return (printf("Error\nmap is not load"), NULL);
+		return (printf("Error\nmap_tiles is not load"), NULL);
 	set_size_map(map);
 	check_size_line(map);
 	if (check_border(*map) == 1)
-		return (printf("Error\nMap Invalide\n"), free_tab(map->tab),
-			map->destroy(map), NULL);
+		return (printf("Error\nMap Invalide for border\n"), map->destroy(map), NULL);
 	free_tab(map->tab);
 	return (map);
 }

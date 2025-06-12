@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 13:03:52 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/12 00:01:09 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/12 15:07:28 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,22 +57,22 @@ int	check_cub(t_game *game, t_map *map)
 			|| map->tab[1][0] != 'S'
 			|| map->tab[2][0] != 'W'
 			|| map->tab[3][0] != 'E'
-			|| map->tab[4][0] != 'F'
-			|| map->tab[5][0] != 'C')
+			|| map->tab[5][0] != 'F'
+			|| map->tab[6][0] != 'C')
 	{
 		return (printf("Error\nFrom .cub file\n"), 1);
 	}
-	copy_map(map, map->tab, 6);
+	copy_map(map, map->tab, 8);
 	if (init_tex_man(game) == 1)
-		return (printf("Error\nFrom texture\n"), 1);
+		return (printf("Error\nInit From texture\n"), 1);
 	set_texture(&game->pathn, map->tab[0]);
 	set_texture(&game->paths, map->tab[1]);
 	set_texture(&game->pathw, map->tab[2]);
 	set_texture(&game->pathe, map->tab[3]);
 	load_textures(game);
-	if ((int)ft_strlen(map->tab[4]) < 5 || (int)ft_strlen(map->tab[5]) < 5
+	if ((int)ft_strlen(map->tab[5]) < 5 || (int)ft_strlen(map->tab[6]) < 5
 		|| check_error_parsing(game) == 1)
-		return (printf("Error\nFrom texture\n"), 1);
+		return (printf("Error\nFrom texture\n"), destroy_img(game, 1), 1);
 	game->tex_man->floor = ft_substr(map->tab[4], 2, ft_strlen(map->tab[4]));
 	game->tex_man->cell = ft_substr(map->tab[5], 2, ft_strlen(map->tab[5]));
 	return (0);

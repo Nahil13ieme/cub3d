@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 15:03:53 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/11 16:33:29 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/12 15:10:24 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ int	check_horizon(char *str)
 
 	i = 0;
 	j = ft_strlen(str) - 1;
-	while (str[i] == ' ')
+	while (str[i] == ' ' && str[i])
 		i++;
+	if (str[i] == 0)
+		return (0);
 	if (str[i] != '1')
 		return (1);
 	while (str[j] == ' ')
@@ -83,10 +85,10 @@ int	check_border(t_map map)
 	while (i < ft_tablen(map.tiles))
 	{
 		if (check_horizon(map.tiles[i]) == 1)
-			return (1);
+			return (printf("horizontale\n"), 1);
 		i++;
 	}
 	if (check_verti(map.tiles) == 1)
-		return (1);
+		return (printf("verticale\n"), 1);
 	return (0);
 }
