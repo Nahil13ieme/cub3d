@@ -1,10 +1,10 @@
 NO asset/wall_south2.xpm
 SO asset/wall_south2.xpm
 WE asset/wall_north.xpm
-EA asset/wall_north.xpm
+EA asset/wall_nordsath.xpm
 
-F 255,255,255
-C 165,42,42
+F 255,0,0
+C 165,252,42
 
          1111111111111111111111111
          1000000000110000000000001

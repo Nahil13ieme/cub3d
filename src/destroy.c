@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:30:57 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/13 13:15:13 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/06/13 13:46:14 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	free_tex_man(t_game *game)
 	free(game->tex_man->wall_north);
 	free(game->tex_man->wall_south);
 	free(game->tex_man->wall_west);
-	//free(game->tex_man->cell);
-	//free(game->tex_man->floor);
+	free(game->tex_man->cell);
+	free(game->tex_man->floor);
 	free(game->tex_man);
 }
 
@@ -41,10 +41,14 @@ void	destroy_game(t_game *game)
 		game->map->destroy(game->map);
 	if (game->render)
 		game->render->destroy(game->render);
-	mlx_destroy_image(game->mlx, game->tex_man->wall_east->img_ptr);
-	mlx_destroy_image(game->mlx, game->tex_man->wall_north->img_ptr);
-	mlx_destroy_image(game->mlx, game->tex_man->wall_south->img_ptr);
-	mlx_destroy_image(game->mlx, game->tex_man->wall_west->img_ptr);
+	if (game->tex_man->wall_east->img_ptr)
+		mlx_destroy_image(game->mlx, game->tex_man->wall_east->img_ptr);
+	if (game->tex_man->wall_north->img_ptr)
+		mlx_destroy_image(game->mlx, game->tex_man->wall_north->img_ptr);
+	if (game->tex_man->wall_south->img_ptr)
+		mlx_destroy_image(game->mlx, game->tex_man->wall_south->img_ptr);
+	if (game->tex_man->wall_west->img_ptr)
+		mlx_destroy_image(game->mlx, game->tex_man->wall_west->img_ptr);
 	mlx_destroy_window(game->mlx, game->win);
 	mlx_destroy_display(game->mlx);
 	free(game->mlx);
@@ -99,15 +103,20 @@ void	free_texture_before(t_texture_manager *text)
 void	destroy_img(t_game *game, int sel)
 {
 	if (sel == 1)
-		{
-			free(game->pathe);
-			free(game->paths);
-			free(game->pathn);
-			free(game->pathw);
-		}
-	mlx_destroy_image(game->mlx, game->tex_man->wall_east->img_ptr);
-	mlx_destroy_image(game->mlx, game->tex_man->wall_north->img_ptr);
-	mlx_destroy_image(game->mlx, game->tex_man->wall_south->img_ptr);
-	mlx_destroy_image(game->mlx, game->tex_man->wall_west->img_ptr);
+	{
+		free(game->pathe);
+		free(game->paths);
+		free(game->pathn);
+		free(game->pathw);
+	}
+	if (game->tex_man->wall_east)
+		mlx_destroy_image(game->mlx, game->tex_man->wall_east->img_ptr);
+	if (game->tex_man->wall_north)
+		mlx_destroy_image(game->mlx, game->tex_man->wall_north->img_ptr);
+	if (game->tex_man->wall_south)
+		mlx_destroy_image(game->mlx, game->tex_man->wall_south->img_ptr);
+	if (game->tex_man->wall_west)
+		mlx_destroy_image(game->mlx, game->tex_man->wall_west->img_ptr);
 	free_texture_before(game->tex_man);
+	printf("Error from texture\n");
 }

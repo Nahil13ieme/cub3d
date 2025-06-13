@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 13:03:52 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/13 13:24:06 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/06/13 13:46:01 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,22 @@ int	init_tex_man(t_game *game)
 	return (0);
 }
 
+static void	free_map_tiles(t_map *map)
+{
+	int	i;
+
+	if (!map->tiles)
+		return ;
+	i = 0;
+	while (map->tiles[i])
+	{
+		free(map->tiles[i]);
+		i++;
+	}
+	free(map->tiles);
+	map->tiles = NULL;
+}
+
 int	check_cub(t_game *game, t_map *map)
 {
 	if (map->tab[0][0] != 'N'
@@ -70,12 +86,10 @@ int	check_cub(t_game *game, t_map *map)
 	set_texture(&game->pathw, map->tab[2]);
 	set_texture(&game->pathe, map->tab[3]);
 	load_textures(game);
-	if ((int)ft_strlen(map->tab[5]) < 5 || (int)ft_strlen(map->tab[6]) < 5
+	if (ft_strlen(map->tab[5]) < 5 || ft_strlen(map->tab[6]) < 5
 		|| check_error_parsing(game) == 1)
-		return (printf("Error\nFrom texture\n"), destroy_img(game, 1), 1);
+		return (free_map_tiles(map), destroy_img(game, 1), 1);
 	game->tex_man->floor = ft_substr(map->tab[5], 2, ft_strlen(map->tab[5]));
 	game->tex_man->cell = ft_substr(map->tab[6], 2, ft_strlen(map->tab[6]));
-	printf("Floor color: %s : %s\n", game->tex_man->floor, map->tab[5]);
-	printf("Cell color: %s : %s\n", game->tex_man->cell, map->tab[6]);
 	return (0);
 }
