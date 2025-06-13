@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_cub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
+/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 13:03:52 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/12 15:07:28 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/13 13:24:06 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,9 @@ int	check_cub(t_game *game, t_map *map)
 	if ((int)ft_strlen(map->tab[5]) < 5 || (int)ft_strlen(map->tab[6]) < 5
 		|| check_error_parsing(game) == 1)
 		return (printf("Error\nFrom texture\n"), destroy_img(game, 1), 1);
-	game->tex_man->floor = ft_substr(map->tab[4], 2, ft_strlen(map->tab[4]));
-	game->tex_man->cell = ft_substr(map->tab[5], 2, ft_strlen(map->tab[5]));
+	game->tex_man->floor = ft_substr(map->tab[5], 2, ft_strlen(map->tab[5]));
+	game->tex_man->cell = ft_substr(map->tab[6], 2, ft_strlen(map->tab[6]));
+	printf("Floor color: %s : %s\n", game->tex_man->floor, map->tab[5]);
+	printf("Cell color: %s : %s\n", game->tex_man->cell, map->tab[6]);
 	return (0);
 }

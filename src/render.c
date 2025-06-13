@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
+/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:16:01 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/06/05 13:46:58 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/13 13:31:30 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,28 @@ void	draw_img_to_buffer(t_texture *b, t_texture *s,
 	}
 }
 
+static int	get_color_from_string(char *str)
+{
+	char	**parts;
+	int		r;
+	int		g;
+	int		b;
+	int		color;
+
+	parts = ft_split(str, ',');
+	if (!parts || !parts[0] || !parts[1] || !parts[2])
+		return (0x000000); // Default to black if parsing fails
+	r = ft_atoi(parts[0]);
+	g = ft_atoi(parts[1]);
+	b = ft_atoi(parts[2]);
+	free(parts[0]);
+	free(parts[1]);
+	free(parts[2]);
+	free(parts);
+	color = (r << 16) | (g << 8) | b;
+	return (color);
+}
+
 void	draw_floor(t_game *game)
 {
 	int			x;
@@ -85,7 +107,7 @@ void	draw_floor(t_game *game)
 	t_texture	*t;
 	int			i;
 
-	color = 0x0000FF;
+	color = get_color_from_string(game->tex_man->floor);
 	t = game->render->main_buffer;
 	y = 0;
 	while (y < W_HEIGHT)
@@ -100,7 +122,7 @@ void	draw_floor(t_game *game)
 			x++;
 		}
 		if (y > W_HEIGHT / 2)
-			color = 0x00FF00;
+			color = get_color_from_string(game->tex_man->cell);
 		y++;
 	}
 }

@@ -3,8 +3,8 @@ SO asset/wall_south2.xpm
 WE asset/wall_north.xpm
 EA asset/wall_north.xpm
 
-F 220,100,0
-C 225,30,0
+F 255,255,255
+C 165,42,42
 
          1111111111111111111111111
          1000000000110000000000001
