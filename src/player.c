@@ -6,22 +6,28 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:15:02 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/06/16 11:10:59 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/06/16 12:14:29 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/player.h"
 
-static t_player	*set_player_dir(t_game *g, t_player *p, int i, int j)
+static t_player	*set_player_dir(char c, t_player *p, int i, int j)
 {
 	p->velocity = vector2d(0, 0);
 	p->pos = vector2d(j + 0.5f, i + 0.5f);
-	g->map->start = vector2d(j, i);
-	p->dir = vector2d(0, -1);
+	if (c == 'N')
+		p->dir = vector2d(0, -1);
+	if (c == 'S')
+		p->dir = vector2d(0, 1);
+	if (c == 'E')
+		p->dir = vector2d(-1, 0);
+	if (c == 'W')
+		p->dir = vector2d(1, 0);
 	return (p);
 }
 
-t_player	*	ft_init_player(t_game *game)
+t_player	*ft_init_player(t_game *game)
 {
 	int			i;
 	int			j;
@@ -43,7 +49,7 @@ t_player	*	ft_init_player(t_game *game)
 		{
 			c = map[i][j];
 			if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
-				return (set_player_dir(game, player, i, j));
+				return (set_player_dir(c, player, i, j));
 		}
 	}
 	free(player);
