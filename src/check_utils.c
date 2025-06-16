@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 12:46:26 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/16 12:49:53 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/16 13:49:37 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	init_tex_man(t_game *game)
 	game->tex_man->wall_north = NULL;
 	game->tex_man->wall_west = NULL;
 	game->tex_man->wall_south = NULL;
+	game->tex_man->cell = NULL;
+	game->tex_man->floor	 = NULL;
 	return (0);
 }
 
