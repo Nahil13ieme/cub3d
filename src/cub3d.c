@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 15:43:10 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/06/16 13:30:10 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/16 14:15:43 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+int	close_window(t_game *game)
+{
+	destroy_game(game);
+	return (0);
+}
 
 int	main(int ac, char **av)
 {
@@ -33,6 +39,7 @@ int	main(int ac, char **av)
 		return (1);
 	mlx_loop_hook(game->mlx, game_loop, game);
 	mlx_hook(game->win, 2, 1L << 0, key_hook, game);
+	mlx_hook(game->win, 17, 0, close_window, game);
 	mlx_hook(game->win, 3, 1L << 1, handle_key_release, game);
 	mlx_loop(mlx);
 	return (0);
