@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
+/*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 00:00:26 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/12 11:50:47 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/16 13:29:05 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,10 @@ int	check_search(char **map, int lock, int i)
 		i++;
 	}
 	return (0);
+}
+
+void	draw_buffer(t_game *game)
+{
+	draw_floor(game);
+	draw_walls(game);
 }

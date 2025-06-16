@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 15:43:10 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/06/16 13:20:53 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/06/16 13:30:10 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int ac, char **av)
 	void	*mlx;
 	void	*win;
 	t_game	*game;
-	
+
 	if (ac != 2)
 		return (printf("Error : ./cub3d [map name].cub\n"), 1);
 	if (check_file(av[1]) == FALSE)

@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 12:52:35 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/16 12:53:58 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/16 13:31:33 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,5 @@ void	destroy_img(t_game *game, int sel)
 	if (game->tex_man->wall_west)
 		mlx_destroy_image(game->mlx, game->tex_man->wall_west->img_ptr);
 	free_texture_before(game->tex_man);
-	printf("Error from texture\n");
+	printf("Error\nfrom texture\n");
 }

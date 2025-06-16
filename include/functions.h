@@ -6,7 +6,7 @@
 /*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:51:21 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/16 13:01:28 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/16 13:30:27 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ void		free_texture_before(t_texture_manager *text);
 void		free_tex_man(t_game *game);
 void		destroy_img(t_game *game, int sel);
 void		free_path(t_game *game);
-
 
 /****************************************DRAW*********************************/
 void		draw_pixel(t_texture *t, int x, int y, int color);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:16:01 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/06/13 13:31:30 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/06/16 13:28:57 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static int	get_color_from_string(char *str)
 
 	parts = ft_split(str, ',');
 	if (!parts || !parts[0] || !parts[1] || !parts[2])
-		return (0x000000); // Default to black if parsing fails
+		return (0x000000);
 	r = ft_atoi(parts[0]);
 	g = ft_atoi(parts[1]);
 	b = ft_atoi(parts[2]);
@@ -125,10 +125,4 @@ void	draw_floor(t_game *game)
 			color = get_color_from_string(game->tex_man->cell);
 		y++;
 	}
-}
-
-void	draw_buffer(t_game *game)
-{
-	draw_floor(game);
-	draw_walls(game);
 }
