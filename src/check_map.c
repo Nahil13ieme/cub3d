@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 12:56:34 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/16 11:56:11 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/06/16 13:00:16 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char **ft_init_tab(int fd)
 		else
 			line = ft_strjoinfree(&line, buffer);
 	}
-	tab = ft_split_space(line, '\n');
+	tab = ft_split_space(line, '\n', 0, 0);
 	free(line);
 	return (tab);
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
+/*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 11:50:26 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/12 15:34:47 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/16 12:56:20 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-static char **ft_free(char **tab, int i)
+static char	**ft_free(char **tab, int i)
 {
 	while (i >= 0)
 	{
@@ -24,10 +24,10 @@ static char **ft_free(char **tab, int i)
 }
 
 // Fonction pour compter le nombre de mots séparés par le caractère 'c'
-static size_t ft_countword(const char *str, char c)
+static size_t	ft_countword(const char *str, char c)
 {
-	size_t i;
-	size_t count;
+	size_t	i;
+	size_t	count;
 
 	i = 0;
 	count = 0;
@@ -43,9 +43,9 @@ static size_t ft_countword(const char *str, char c)
 }
 
 // Fonction pour calculer la longueur du mot à partir de l'index 'i'
-static size_t ft_lenword(const char *s, size_t i, char c)
+static size_t	ft_lenword(const char *s, size_t i, char c)
 {
-	size_t len;
+	size_t	len;
 
 	len = 0;
 	while (s[i + len] && s[i + len] != c)
@@ -54,10 +54,10 @@ static size_t ft_lenword(const char *s, size_t i, char c)
 }
 
 // Fonction qui extrait un mot de la chaîne en utilisant ft_substr
-static char *ft_extract_word(const char *s, size_t start, size_t len)
+static char	*ft_extract_word(const char *s, size_t start, size_t len)
 {
-	char *word;
-	size_t i;
+	char	*word;
+	size_t	i;
 
 	i = 0;
 	word = malloc(sizeof(char) * (len + 1));
@@ -75,14 +75,10 @@ static char *ft_extract_word(const char *s, size_t start, size_t len)
 }
 
 // Fonction pour découper la chaîne en mots
-char **ft_split_space(const char *s, char c)
+char	**ft_split_space(const char *s, char c, size_t i, size_t j)
 {
-	size_t i;
-	size_t j;
-	char **tab;
+	char	**tab;
 
-	i = 0;
-	j = 0;
 	if (!s)
 		return (NULL);
 	tab = malloc(sizeof(char *) * (ft_countword(s, c) + 1));

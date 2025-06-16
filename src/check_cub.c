@@ -3,53 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_cub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 13:03:52 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/16 11:06:08 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/06/16 12:50:28 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-
-void	copy_map(t_map *map, char **tab, int i)
-{
-	int	k;
-	int	l;
-
-	l = i;
-	k = 0;
-	while (tab[l])
-		l++;
-	map->tiles = malloc(sizeof(char **) * (l - i + 1));
-	while (tab[i])
-	{
-		map->tiles[k] = ft_strdup(tab[i]);
-		k++;
-		i++;
-	}
-	map->tiles[k] = 0;
-}
-
-void	set_texture(char **text, char *str)
-{
-	while (*str && *str != ' ')
-		str++;
-	str++;
-	*text = ft_strdup(str);
-}
-
-int	init_tex_man(t_game *game)
-{
-	game->tex_man = malloc(sizeof(t_texture_manager));
-	if (!game->tex_man)
-		return (1);
-	game->tex_man->wall_east = NULL;
-	game->tex_man->wall_north = NULL;
-	game->tex_man->wall_west = NULL;
-	game->tex_man->wall_south = NULL;
-	return (0);
-}
 
 static void	free_map_tiles(t_map *map)
 {
@@ -84,8 +45,9 @@ void	free_split(char **split)
 
 static int	is_number_between_0_255(char *s)
 {
-	int n = 0;
+	int	n;
 
+	n = 0;
 	if (!s || !*s)
 		return (0);
 	while (*s)
@@ -136,11 +98,8 @@ int	check_cub(t_game *game, t_map *map)
 	}
 	copy_map(map, map->tab, 8);
 	if (init_tex_man(game) == 1)
-		return (printf("Error\nInit From texture\n"), 1);
-	set_texture(&game->pathn, map->tab[0]);
-	set_texture(&game->paths, map->tab[1]);
-	set_texture(&game->pathw, map->tab[2]);
-	set_texture(&game->pathe, map->tab[3]);
+		return (printf("Error\nInit From texture Init\n"), 1);
+	set_texture_from_path(game, map);
 	load_textures(game);
 	if (ft_strlen(map->tab[5]) < 5 || ft_strlen(map->tab[6]) < 5
 		|| check_error_parsing(game) == 1)

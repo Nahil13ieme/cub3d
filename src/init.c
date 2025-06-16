@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
+/*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:13:49 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/05 13:30:25 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/16 12:44:33 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,12 @@ void	init_input(t_game *game)
 	game->input.left = false;
 	game->input.right = false;
 	game->input.maj = false;
+}
+
+void	set_texture_from_path(t_game *game, t_map *map)
+{
+	set_texture(&game->pathn, map->tab[0]);
+	set_texture(&game->paths, map->tab[1]);
+	set_texture(&game->pathw, map->tab[2]);
+	set_texture(&game->pathe, map->tab[3]);
 }

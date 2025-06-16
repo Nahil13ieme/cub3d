@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
+/*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:51:21 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/12 14:51:05 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/16 13:01:28 by tle-saut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FUNCTIONS_H
 
 # include "cub3d.h"
+# include <stdio.h>
 
 typedef struct s_map				t_map;
 typedef struct s_debug				t_debug;
@@ -73,6 +74,7 @@ void		destroy_game_before(t_game *game, int sel);
 void		free_texture_before(t_texture_manager *text);
 void		free_tex_man(t_game *game);
 void		destroy_img(t_game *game, int sel);
+void		free_path(t_game *game);
 
 
 /****************************************DRAW*********************************/
@@ -104,6 +106,7 @@ int			key_hook(int keycode, t_game *game);
 
 /****************************************INIT*********************************/
 void		init_input(t_game *game);
+void		set_texture_from_path(t_game *game, t_map *map);
 
 /****************************************MAP**********************************/
 t_map		*new_map(void);
@@ -164,6 +167,8 @@ int			check_error_parsing(t_game *game);
 int			check_search(char **map, int lock, int i);
 
 /****************************************UTILS_2******************************/
-char	**ft_split_space(const char *s, char c);
+
+/****************************************SPLIT********************************/
+char		**ft_split_space(const char *s, char c, size_t i, size_t j);
 
 #endif
