@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   destroy2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 12:52:35 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/16 13:31:33 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/16 13:46:06 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void	destroy_img(t_game *game, int sel)
 		mlx_destroy_image(game->mlx, game->tex_man->wall_south->img_ptr);
 	if (game->tex_man->wall_west)
 		mlx_destroy_image(game->mlx, game->tex_man->wall_west->img_ptr);
+	free(game->tex_man->floor);
+	free(game->tex_man->cell);
 	free_texture_before(game->tex_man);
 	printf("Error\nfrom texture\n");
 }

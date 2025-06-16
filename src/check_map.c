@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 12:56:34 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/16 13:41:54 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/16 13:45:15 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ t_map	*ft_init_map(char *path, t_game *game)
 	check_size_line(map);
 	if (check_border(*map) == 1)
 		return (free_tab(map->tab), printf("Error\nMap Invalide for border\n"),
-			map->destroy(map), free_path(game), free_tex_man(game), NULL);
+			map->destroy(map), destroy_img(game, 1), NULL);
 	free_tab(map->tab);
 	return (map);
 }
