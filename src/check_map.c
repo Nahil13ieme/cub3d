@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 12:56:34 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/16 10:54:44 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/06/16 11:56:11 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,10 @@ t_map *ft_init_map(char *path, t_game *game)
 	set_size_map(map);
 	check_size_line(map);
 	if (check_border(*map) == 1)
+	{
+		free_tab(map->tab);
 		return (printf("Error\nMap Invalide for border\n"), map->destroy(map), NULL);
+	}
 	free_tab(map->tab);
 	return (map);
 }

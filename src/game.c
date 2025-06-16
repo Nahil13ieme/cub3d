@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:20:51 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/06/16 11:13:15 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/06/16 11:55:37 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,9 @@ t_game	*new_game(void *mlx, void *win, int is_debugging, char **av)
 	game->map = ft_init_map(av[1], game);
 	game->render = NULL;
 	game->debug = NULL;
+	game->player = NULL;
 	if (game->map == NULL)
-		return (destroy_map(game->map), destroy_game_before(game, 0), NULL);
+		return (destroy_game(game), NULL);
 	return (new_game2(game, is_debugging));
 }
 
