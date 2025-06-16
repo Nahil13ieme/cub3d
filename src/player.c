@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
+/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:15:02 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/06/11 16:46:20 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/16 11:10:59 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static t_player	*set_player_dir(t_game *g, t_player *p, int i, int j)
 	return (p);
 }
 
-t_player	*ft_init_player(t_game *game)
+t_player	*	ft_init_player(t_game *game)
 {
 	int			i;
 	int			j;
@@ -46,7 +46,7 @@ t_player	*ft_init_player(t_game *game)
 				return (set_player_dir(game, player, i, j));
 		}
 	}
-	printf("No Starting Pos\n");
+	free(player);
 	return (NULL);
 }
 

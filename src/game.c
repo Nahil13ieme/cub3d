@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-saut <tle-saut@student.42perpignan>    +#+  +:+       +#+        */
+/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:20:51 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/06/12 14:11:26 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/16 11:13:15 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static t_game	*new_game2(t_game *game, int is_debugging)
 {
 	game->player = ft_init_player(game);
 	if (!game->player)
-		return (destroy_map(game->map), NULL);
+		return (destroy_game(game), NULL);
 	game->render = new_render(game);
 	init_input(game);
 	if (is_debugging)
@@ -42,6 +42,8 @@ t_game	*new_game(void *mlx, void *win, int is_debugging, char **av)
 	game->is_debugging = is_debugging;
 	game->game_state = RUNNING;
 	game->map = ft_init_map(av[1], game);
+	game->render = NULL;
+	game->debug = NULL;
 	if (game->map == NULL)
 		return (destroy_map(game->map), destroy_game_before(game, 0), NULL);
 	return (new_game2(game, is_debugging));

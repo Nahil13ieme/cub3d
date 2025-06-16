@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 14:24:00 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/13 14:02:53 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/06/16 11:05:16 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,12 @@ void	free_tab(char **tab)
 	int	i;
 
 	i = 0;
+	if (!tab)
+		return ;
 	while (tab[i])
 	{
-		if (!(tab[i]))
-			i++;
-		else
-		{
-			free(tab[i]);
-			i++;
-		}
+		free(tab[i]);
+		i++;
 	}
 	free(tab);
 }

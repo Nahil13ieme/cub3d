@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 13:03:52 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/14 12:01:14 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/06/16 11:06:08 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ static int	check_color(char *str)
 
 int	check_cub(t_game *game, t_map *map)
 {
-	if (map->tab[0][0] != 'N'
+	if (!map->tab || !map->tab[0] || map->tab[0][0] != 'N'
 			|| map->tab[1][0] != 'S'
 			|| map->tab[2][0] != 'W'
 			|| map->tab[3][0] != 'E'
