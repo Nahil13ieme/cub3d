@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 15:43:10 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/06/13 14:09:12 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/06/16 13:20:53 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int ac, char **av)
 	void	*mlx;
 	void	*win;
 	t_game	*game;
-
+	
 	if (ac != 2)
 		return (printf("Error : ./cub3d [map name].cub\n"), 1);
 	if (check_file(av[1]) == FALSE)
@@ -31,9 +31,6 @@ int	main(int ac, char **av)
 	game = new_game(mlx, win, DEBUG, av);
 	if (!game)
 		return (1);
-	if (check_search(game->map->tiles, 0, 0) == 1)
-		return (game->destroy(game), destroy_map(game->map),
-			destroy_game_before(game, 0), 1);
 	mlx_loop_hook(game->mlx, game_loop, game);
 	mlx_hook(game->win, 2, 1L << 0, key_hook, game);
 	mlx_hook(game->win, 3, 1L << 1, handle_key_release, game);

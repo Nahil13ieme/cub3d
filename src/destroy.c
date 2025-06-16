@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   destroy.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:30:57 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/16 12:53:27 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/16 13:16:03 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	destroy_player(t_player *player)
 
 void	free_tex_man(t_game *game)
 {
+	if (!game->tex_man)
+		return ;
 	free(game->tex_man->wall_east);
 	free(game->tex_man->wall_north);
 	free(game->tex_man->wall_south);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_cub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-saut <tle-saut@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 13:03:52 by tle-saut          #+#    #+#             */
-/*   Updated: 2025/06/16 12:50:28 by tle-saut         ###   ########.fr       */
+/*   Updated: 2025/06/16 13:21:15 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,12 @@ int	check_cub(t_game *game, t_map *map)
 	if (check_color(map->tab[5]) == 1
 		|| check_color(map->tab[6]) == 1)
 		return (free_map_tiles(map), destroy_img(game, 1), 1);
+	if (check_search(map->tiles, 0, 0) == 1)
+	{
+		free_map_tiles(map);
+		destroy_img(game, 1);
+		return (1);
+	}
 	game->tex_man->floor = ft_strdup(map->tab[5] + 2);
 	game->tex_man->cell = ft_strdup(map->tab[6] + 2);
 	return (0);
